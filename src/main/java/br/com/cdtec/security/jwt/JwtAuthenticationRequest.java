@@ -6,31 +6,33 @@ public class JwtAuthenticationRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String dsLogin;	
-	private String dsPassword;
+	private String dsEmail;	
+	private String dsSenha;
 
 	public JwtAuthenticationRequest() {
 		super();
 	}
 	
 	public JwtAuthenticationRequest(String dsLogin, String dsPassword) {
-		this.setDsLogin(dsLogin);
-		this.setDsPassword(dsPassword);
+		this.setDsEmail(dsEmail);
+		this.setDsSenha(dsSenha);
 	}
 
-	public String getDsLogin() {
-		return dsLogin;
+	public String getDsEmail() {
+		return dsEmail;
 	}
 
-	public void setDsLogin(String dsLogin) {
-		this.dsLogin = dsLogin;
+	public void setDsEmail(String dsEmail) {
+		this.dsEmail = dsEmail;
 	}
 
-	public String getDsPassword() {
-		return dsPassword;
+	public String getDsSenha() {
+		return dsSenha;
 	}
 
-	public void setDsPassword(String dsPassword) {
-		this.dsPassword = dsPassword;
+	public void setDsSenha(String dsSenha) {
+		this.dsSenha = dsSenha;
 	}
+
+
 }

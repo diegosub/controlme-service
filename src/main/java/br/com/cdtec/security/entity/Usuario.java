@@ -43,7 +43,7 @@ public class Usuario implements Serializable {
 	@Column(name="id_perfil")
 	private Integer idPerfil;
 	
-	@Formula("(select d.ds_dominio from ngc.tb_dominio d where d.ds_campo = 'PERFIL_USUARIO' and d.vl_dominio = cast(id_perfil as text))")
+	@Formula("(select d.ds_dominio from ngc.tb_dominio d where d.ds_campo = 'ID_PERFIL' and d.vl_dominio = cast(id_perfil as text))")
 	private String dsPerfil;
 	
 	@Temporal(TemporalType.TIMESTAMP)

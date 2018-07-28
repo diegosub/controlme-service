@@ -38,20 +38,20 @@ public class AuthenticationRestController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@PostMapping(value = "/api/auth")
+	@PostMapping(value = "/api/auth/login")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) throws AuthenticationException {
 		
 		final Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(
-						authenticationRequest.getDsLogin(), 
-						authenticationRequest.getDsPassword()
+						authenticationRequest.getDsEmail(), 
+						authenticationRequest.getDsSenha()
 				)
 		);
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getDsLogin());
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getDsEmail());
 		final String token = jwtTokenUtil.generateToken(userDetails);
-		final Usuario usuario = usuarioService.pesquisarPorLogin(authenticationRequest.getDsLogin());
+		final Usuario usuario = usuarioService.pesquisarPorLogin(authenticationRequest.getDsEmail());
 		usuario.setDsSenha(null);
 		
 		return ResponseEntity.ok(new CurrentUser(token, usuario));

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cdtec.response.Response;
+import br.com.cdtec.security.dto.TokenCadastroDTO;
 import br.com.cdtec.security.dto.UsuarioDTO;
 import br.com.cdtec.security.entity.Usuario;
 import br.com.cdtec.security.service.UsuarioService;
@@ -54,6 +55,47 @@ public class RegistrarUsuarioController {
 		return ResponseEntity.ok(response);
 		
 	}
+	
+	@PostMapping(value = "/api/auth/ativar")
+	public ResponseEntity<?> ativar(HttpServletRequest request, @RequestBody TokenCadastroDTO tokenCadastroDTO,
+			BindingResult result) {
+		
+		Response<TokenCadastroDTO> response = new Response<TokenCadastroDTO>();
+		
+		try {
+			
+			validarParametros(tokenCadastroDTO, result);			
+			if (result.hasErrors()) {
+				result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
+				return ResponseEntity.badRequest().body(response);
+			}
+
+			//completarInserir(usuarioDTO, request);
+			//usuarioDTO = convertEntityToDTO(usuarioService.inserir(convertDTOToEntity(usuarioDTO)));
+			//response.setData(usuarioDTO);
+		} catch (Exception e) {
+			response.getErrors().add(e.getMessage());
+			return ResponseEntity.badRequest().body(response);
+		}
+		return ResponseEntity.ok(response);
+		
+	}
+	
+	protected void validarParametros(TokenCadastroDTO tokenCadastroDTO, BindingResult result) {
+		
+		if(tokenCadastroDTO == null) {
+			result.addError(new ObjectError("Token", "O Link enviado é inválido!"));
+		}
+		
+		if(tokenCadastroDTO.getIdUsuario() == null || tokenCadastroDTO.getIdUsuario().intValue() <= 0) {
+			result.addError(new ObjectError("Token", "O Link enviado é inválido!"));
+		}
+		
+		if(tokenCadastroDTO.getDsToken() == null || tokenCadastroDTO.getDsToken().trim().equals("")) {
+			result.addError(new ObjectError("Token", "O Link enviado é inválido!"));
+		}
+		
+	}	
 	
 	protected void validarRegistrar(UsuarioDTO usuarioDTO, BindingResult result) {
 		
