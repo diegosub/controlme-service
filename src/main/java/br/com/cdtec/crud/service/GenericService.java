@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Sort;
 
 /**
- * Classe que extender o CrudService deve ser annotada com @Transaction
+ * Classe que extender o GenericService deve ser annotada com @Transaction
  * apontando para o transctionManager que deseja usar na classe,
  * caso não seja annotada com @Transaction, os metodos não irão abrir transação 
  * a não ser que já estejam incluidos em uma transação 
