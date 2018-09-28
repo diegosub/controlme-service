@@ -126,7 +126,7 @@ public class JwtTokenUtil implements Serializable {
 	private String doGenerateToken(Map<String, Object> claims) {
 		
 		final Date createdDate = (Date) claims.get(CLAIM_KEY_CREATED);
-		final Date expirationDate = new Date(createdDate.getTime() + expiration * 1000);
+		final Date expirationDate = new Date(createdDate.getTime() + expiration);
 		return Jwts.builder()
 				.setClaims(claims)
 				.setExpiration(expirationDate)

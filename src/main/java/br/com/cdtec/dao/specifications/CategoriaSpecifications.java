@@ -2,6 +2,8 @@ package br.com.cdtec.dao.specifications;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -12,21 +14,22 @@ import br.com.cdtec.entity.Categoria;
 public class CategoriaSpecifications {
 	
 	private CategoriaSpecifications(){}
-
+	
 	@SuppressWarnings("serial")
-	public static Specification<Categoria> dsCategoriaLike(final String dsCategoria){
+	public static Specification<Categoria> fetchSubcategoriaAtiva() {
 		return new Specification<Categoria>() {
-			public Predicate toPredicate(Root<Categoria> root,
-					CriteriaQuery<?> query, CriteriaBuilder cb) {
-				if(dsCategoria != null && !dsCategoria.trim().equals("")) {
-					return cb.like(cb.lower(root.get("dsCategoria")), "%"+dsCategoria.toLowerCase()+"%");
-				}
-				
+			@Override			
+			@SuppressWarnings("rawtypes")
+			public Predicate toPredicate(Root<Categoria> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				Join listaSubcategoria = (Join)root.fetch("listaSubcategoria", JoinType.LEFT);
+				query.distinct(true);
+				query.orderBy(cb.asc(root.get("dsCategoria")), 
+						  	  cb.asc(listaSubcategoria.get("dsSubcategoria")));
 				return null;
 			}
 		};
 	}
-	
+
 	@SuppressWarnings("serial")
 	public static Specification<Categoria> fgAtivoIgual(final Boolean fgAtivo){
 		return new Specification<Categoria>() {
@@ -54,4 +57,5 @@ public class CategoriaSpecifications {
 			}
 		};
 	}
+
 }

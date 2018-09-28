@@ -11,21 +11,24 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import br.com.cdtec.util.ApplicationContextProvider;
 
 @Configuration
-@ComponentScan(basePackages = {"br.com.cdtec.service" , "br.com.cdtec.security.service"})
+@ComponentScan(basePackages = { "br.com.cdtec.service", "br.com.cdtec.security.service" })
 @EnableScheduling
-public class SpringConfig {
-	
+public class SpringConfig
+{
+
 	@Lazy(false)
-	@Bean(name="applicationContextProvider")
-	public ApplicationContextProvider applicationContextProvider( ApplicationContext applicationContext ){
+	@Bean(name = "applicationContextProvider")
+	public ApplicationContextProvider applicationContextProvider(ApplicationContext applicationContext)
+	{
 		ApplicationContextProvider applicationContextProvider = new ApplicationContextProvider();
-		applicationContextProvider.setApplicationContext( applicationContext );
+		applicationContextProvider.setApplicationContext(applicationContext);
 		return applicationContextProvider;
 	}
-	
+
 	@Bean
-	public ModelMapper modelMapper() {
-	    return new ModelMapper();
+	public ModelMapper modelMapper()
+	{
+		return new ModelMapper();
 	}
 
 }

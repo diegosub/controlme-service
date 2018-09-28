@@ -22,54 +22,48 @@ import br.com.cdtec.security.jwt.JwtAuthenticationTokenFilter;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter
+{
 
 	@Autowired
 	private JwtAuthenticationEntryPoint unauthorizedHandler;
-	
+
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
-	
+
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()			
-			.authorizeRequests()
-			.antMatchers(
-					HttpMethod.GET, 
-					"/",
-					"/*.html",
-					"/favicon.ico",
-					"/**/*.html",
-					"/**/*.css",
-					"/**/*.js")
-			.permitAll()
-			.antMatchers("/api/auth/**").permitAll()
-			.anyRequest().authenticated();
+	protected void configure(HttpSecurity http) throws Exception
+	{
+		http.csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+				.antMatchers(HttpMethod.GET, "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js")
+				.permitAll().antMatchers("/api/auth/**").permitAll().anyRequest().authenticated();
 		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 		http.headers().cacheControl();
 		http.cors();
 	}
-	
+
 	@Autowired
-	public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+	public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception
+	{
 		authenticationManagerBuilder.userDetailsService(this.userDetailsService).passwordEncoder(passwordEncoder());
 	}
-	
+
 	@Bean
-	public PasswordEncoder passwordEncoder() {		
-		return new MD5PasswordEncoder();		
+	public PasswordEncoder passwordEncoder()
+	{
+		return new MD5PasswordEncoder();
 	}
-	
+
 	@Bean
-	public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
+	public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception
+	{
 		return new JwtAuthenticationTokenFilter();
 	}
 
 	@Bean
-	public AuthenticationManager customAuthenticationManager() throws Exception {
+	public AuthenticationManager customAuthenticationManager() throws Exception
+	{
 		return authenticationManager();
 	}
 }
