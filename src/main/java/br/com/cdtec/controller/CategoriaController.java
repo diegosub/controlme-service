@@ -7,16 +7,21 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cdtec.crud.controller.CrudController;
 import br.com.cdtec.dto.CategoriaDTO;
 import br.com.cdtec.entity.Categoria;
+import br.com.cdtec.response.Response;
 import br.com.cdtec.service.CategoriaService;
+import br.com.cdtec.util.RetirarLazy;
 
 @RestController
 @RequestMapping("/api/categoria")
@@ -26,6 +31,25 @@ public class CategoriaController extends CrudController<Categoria, BigInteger, C
 
 	private static final long serialVersionUID = 1L;
 
+	@PostMapping(path = "/pesquisarInativos")
+	public ResponseEntity<Response<List<Object>>> pesquisarInativos(HttpServletRequest request, @RequestBody Categoria categoria)
+	{
+		Response<List<Object>> response = new Response<List<Object>>();
+		try
+		{
+			List<Categoria> lista = getService().pesquisarInativos(categoria);
+			lista = (List<Categoria>) new RetirarLazy<List<Categoria>>(lista).execute();
+			List<Object> listaRetorno = this.atualizarListaResponse(lista);
+			response.setData(listaRetorno);
+			return ResponseEntity.ok(response);
+		}
+		catch (Exception e)
+		{
+			response.getErrors().add(e.getMessage());
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
+	
 	@Override
 	protected void completarInserir(Categoria entity, HttpServletRequest request)
 	{

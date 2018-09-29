@@ -16,7 +16,7 @@ public class CategoriaSpecifications {
 	private CategoriaSpecifications(){}
 	
 	@SuppressWarnings("serial")
-	public static Specification<Categoria> fetchSubcategoriaAtiva() {
+	public static Specification<Categoria> fetchSubcategoria() {
 		return new Specification<Categoria>() {
 			@Override			
 			@SuppressWarnings("rawtypes")
@@ -29,13 +29,33 @@ public class CategoriaSpecifications {
 			}
 		};
 	}
+	
+	@SuppressWarnings("serial")
+	public static Specification<Categoria> fetchSubcategoriaFgAtivoIgual(final Boolean fgAtivo) {
+		return new Specification<Categoria>() {
+			@Override			
+			@SuppressWarnings("rawtypes")
+			public Predicate toPredicate(Root<Categoria> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				Join listaSubcategoria = (Join)root.fetch("listaSubcategoria", JoinType.LEFT);
+				query.distinct(true);
+				query.orderBy(cb.asc(root.get("dsCategoria")), 
+						  	  cb.asc(listaSubcategoria.get("dsSubcategoria")));
+				
+				if(fgAtivo != null && !fgAtivo.toString().equals("")) {
+					return cb.equal(listaSubcategoria.get("fgAtivo"), fgAtivo);
+				}
+								
+				return null;
+			}
+		};
+	}
 
 	@SuppressWarnings("serial")
 	public static Specification<Categoria> fgAtivoIgual(final Boolean fgAtivo){
 		return new Specification<Categoria>() {
 			public Predicate toPredicate(Root<Categoria> root,
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
-				if(fgAtivo != null && !fgAtivo.toString().equals("") && !fgAtivo.toString().equals("T")) {
+				if(fgAtivo != null && !fgAtivo.toString().equals("")) {
 					return cb.equal(root.get("fgAtivo"), fgAtivo);
 				}
 				
