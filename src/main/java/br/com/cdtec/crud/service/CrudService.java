@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.cdtec.crud.repository.GenericRepository;
 
@@ -27,11 +28,15 @@ public abstract class CrudService<Entity, IdClass extends Serializable, Reposito
 	@Autowired
 	private Repository repository;
 
+	@Transactional
 	public Optional<Entity> get(IdClass id) throws Exception
 	{
-		return getRepository().findById(id);
+		
+		Optional<Entity> retorno = getRepository().findById(id);
+		return retorno;
 	}
 
+	@Transactional
 	public Entity inserir(Entity entity) throws Exception
 	{
 		validarInserir(entity);
@@ -39,6 +44,7 @@ public abstract class CrudService<Entity, IdClass extends Serializable, Reposito
 		return entity;
 	}
 
+	@Transactional
 	public Entity alterar(Entity entity) throws Exception
 	{
 		validarAlterar(entity);
@@ -46,6 +52,7 @@ public abstract class CrudService<Entity, IdClass extends Serializable, Reposito
 		return entity;
 	}
 
+	@Transactional
 	public Page<Entity> listarTodos(int page, int count, Sort sort) throws Exception
 	{
 		Pageable pages = PageRequest.of(page, count, sort);
@@ -53,12 +60,14 @@ public abstract class CrudService<Entity, IdClass extends Serializable, Reposito
 	}
 
 	@Override
+	@Transactional
 	public List<Entity> pesquisar(Entity entity, Sort sort) throws Exception
 	{
 		return implementarPesquisar(entity, sort);
 	}
 
 	// SOBRESCREVER O METODO NO SERVICE PARA REALIZAR A PESQUISA
+	@Transactional
 	public List<Entity> implementarPesquisar(Entity entity, Sort sort) throws Exception
 	{
 		return null;

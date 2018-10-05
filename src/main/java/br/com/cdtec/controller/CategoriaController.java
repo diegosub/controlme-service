@@ -107,6 +107,12 @@ public class CategoriaController extends CrudController<Categoria, BigInteger, C
 	{
 		return lista.stream().map(categoria -> convertToDto(categoria)).collect(Collectors.toList());
 	}
+	
+	@Override
+	protected Object atualizarEntityResponse(Categoria entity)
+	{		
+		return this.convertToDto(entity);
+	}
 
 	private CategoriaDTO convertToDto(Categoria categoria)
 	{

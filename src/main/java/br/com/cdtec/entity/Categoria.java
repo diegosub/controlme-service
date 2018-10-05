@@ -3,7 +3,7 @@ package br.com.cdtec.entity;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -61,7 +61,7 @@ public class Categoria implements Serializable
 
 	@OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
 	@Filter(name = "filtroFlgAtivoSubcategoria", condition = "(:flgAtivoSubcategoria = fg_ativo OR fg_ativo is null)")
-	private Set<Subcategoria> listaSubcategoria;
+	private List<Subcategoria> listaSubcategoria;
 
 	
 	public BigInteger getIdCategoria()
@@ -134,14 +134,16 @@ public class Categoria implements Serializable
 		this.tpCategoria = tpCategoria;
 	}
 
-	public Set<Subcategoria> getListaSubcategoria()
+	public List<Subcategoria> getListaSubcategoria()
 	{
 		return listaSubcategoria;
 	}
 
-	public void setListaSubcategoria(Set<Subcategoria> listaSubcategoria)
+	public void setListaSubcategoria(List<Subcategoria> listaSubcategoria)
 	{
 		this.listaSubcategoria = listaSubcategoria;
 	}
+
+
 
 }
