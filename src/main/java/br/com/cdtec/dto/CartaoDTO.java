@@ -1,57 +1,30 @@
-package br.com.cdtec.entity;
+package br.com.cdtec.dto;
 
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.hibernate.annotations.Proxy;
-
-@Entity
-@Table(name = "tb_cartao", schema = "ngc")
-@SequenceGenerator(name = "SQ_CARTAO", sequenceName = "SQ_CARTAO", allocationSize = 1)
-@Proxy(lazy = true)
-public class Cartao implements Serializable
+public class CartaoDTO implements Serializable
 {
-
    private static final long serialVersionUID = 1L;
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_CARTAO")
-   @Column(name = "id_cartao")
    private BigInteger idCartao;
 
-   @Column(name = "ds_cartao")
    private String dsCartao;
 
-   @Column(name = "nr_dia_corte")
    private Integer nrDiaCorte;
 
-   @Column(name = "nr_dia_vencimento")
-   private Integer nrDiaVencimento;
-   
-   @Column(name = "id_usuario")
    private BigInteger idUsuario;
 
-   @Column(name = "fg_ativo")
    private Boolean fgAtivo;
 
-   @Temporal(TemporalType.TIMESTAMP)
-   @Column(name = "dt_cadastro")
    private Date dtCadastro;
 
-   @Temporal(TemporalType.TIMESTAMP)
-   @Column(name = "dt_alteracao")
    private Date dtAlteracao;
+
+   private String tpCategoria;
+
+   private String fgControle;
 
    public BigInteger getIdCartao()
    {
@@ -71,6 +44,16 @@ public class Cartao implements Serializable
    public void setDsCartao(String dsCartao)
    {
       this.dsCartao = dsCartao;
+   }
+
+   public Integer getNrDiaCorte()
+   {
+      return nrDiaCorte;
+   }
+
+   public void setNrDiaCorte(Integer nrDiaCorte)
+   {
+      this.nrDiaCorte = nrDiaCorte;
    }
 
    public BigInteger getIdUsuario()
@@ -113,23 +96,23 @@ public class Cartao implements Serializable
       this.dtAlteracao = dtAlteracao;
    }
 
-   public Integer getNrDiaCorte()
+   public String getTpCategoria()
    {
-      return nrDiaCorte;
+      return tpCategoria;
    }
 
-   public void setNrDiaCorte(Integer nrDiaCorte)
+   public void setTpCategoria(String tpCategoria)
    {
-      this.nrDiaCorte = nrDiaCorte;
+      this.tpCategoria = tpCategoria;
    }
 
-   public Integer getNrDiaVencimento()
+   public String getFgControle()
    {
-      return nrDiaVencimento;
+      return fgControle;
    }
 
-   public void setNrDiaVencimento(Integer nrDiaVencimento)
+   public void setFgControle(String fgControle)
    {
-      this.nrDiaVencimento = nrDiaVencimento;
+      this.fgControle = fgControle;
    }
 }

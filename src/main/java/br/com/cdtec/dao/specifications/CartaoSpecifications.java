@@ -9,36 +9,45 @@ import org.springframework.data.jpa.domain.Specification;
 
 import br.com.cdtec.entity.Cartao;
 
-public class CartaoSpecifications {
-	
-	private CartaoSpecifications(){}
+public class CartaoSpecifications
+{
 
-	@SuppressWarnings("serial")
-	public static Specification<Cartao> dsCartaoLike(final String dsCartao){
-		return new Specification<Cartao>() {
-			public Predicate toPredicate(Root<Cartao> root,
-					CriteriaQuery<?> query, CriteriaBuilder cb) {
-				if(dsCartao != null && !dsCartao.trim().equals("")) {
-					return cb.like(cb.lower(root.get("dsCartao")), "%"+dsCartao.toLowerCase()+"%");
-				}
-				
-				return null;
-			}
-		};
-	}
-	
-	@SuppressWarnings("serial")
-	public static Specification<Cartao> fgAtivoIgual(final Boolean fgAtivo){
-		return new Specification<Cartao>() {
-			public Predicate toPredicate(Root<Cartao> root,
-					CriteriaQuery<?> query, CriteriaBuilder cb) {
-				if(fgAtivo != null && !fgAtivo.toString().equals("") && !fgAtivo.toString().equals("T")) {
-					return cb.equal(root.get("fgAtivo"), fgAtivo);
-				}
-				
-				return null;
-			}
-		};
-	}
-	
+   private CartaoSpecifications()
+   {
+   }
+
+   @SuppressWarnings("serial")
+   public static Specification<Cartao> dsCartaoLike(final String dsCartao)
+   {
+      return new Specification<Cartao>()
+      {
+         public Predicate toPredicate(Root<Cartao> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         {
+            if (dsCartao != null && !dsCartao.trim().equals(""))
+            {
+               return cb.like(cb.lower(root.get("dsCartao")), "%" + dsCartao.toLowerCase() + "%");
+            }
+
+            return null;
+         }
+      };
+   }
+
+   @SuppressWarnings("serial")
+   public static Specification<Cartao> fgAtivoIgual(final Boolean fgAtivo)
+   {
+      return new Specification<Cartao>()
+      {
+         public Predicate toPredicate(Root<Cartao> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         {
+            if (fgAtivo != null && !fgAtivo.toString().equals("") && !fgAtivo.toString().equals("T"))
+            {
+               return cb.equal(root.get("fgAtivo"), fgAtivo);
+            }
+
+            return null;
+         }
+      };
+   }
+
 }

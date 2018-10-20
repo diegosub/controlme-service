@@ -45,8 +45,7 @@ public class CartaoService extends CrudService<Cartao, BigInteger, CartaoReposit
 	
 	@Override
 	public List<Cartao> implementarPesquisar(Cartao cartao, Sort sort) throws Exception {		
-		return getRepository().findAll(Specification.where(CartaoSpecifications.dsCartaoLike(cartao.getDsCartao())													  	
-										              .and(CartaoSpecifications.fgAtivoIgual(cartao.getFgAtivo()))), sort);
+		return getRepository().findAll(Specification.where(CartaoSpecifications.fgAtivoIgual(cartao.getFgAtivo())));
 	}
 	
 }
