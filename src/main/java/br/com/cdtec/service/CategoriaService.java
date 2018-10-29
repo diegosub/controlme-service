@@ -36,11 +36,13 @@ public class CategoriaService extends CrudService<Categoria, BigInteger, Categor
 
 		// LISTANDO CATEGORIAS INATIVAS
 		List<Categoria> listaCatInv = getRepository().findAll(Specification.where(CategoriaSpecifications.fetchSubcategoria())
+		                                                                     .and(CategoriaSpecifications.idUsuarioIgual(categoria.getIdUsuario()))
 																			 .and(CategoriaSpecifications.tpCategoriaIgual(categoria.getTpCategoria()))
 																			 .and(CategoriaSpecifications.fgAtivoIgual(false)));
 
 		// LISTANDO SUBCATEGORIAS INATIVAS COM CATEGORIAS ATIVAS
 		List<Categoria> listaCatAtvSubInv = getRepository().findAll(Specification.where(CategoriaSpecifications.fetchSubcategoriaFgAtivoIgual(false))
+		                                                                           .and(CategoriaSpecifications.idUsuarioIgual(categoria.getIdUsuario()))
 																				   .and(CategoriaSpecifications.tpCategoriaIgual(categoria.getTpCategoria()))
 																				   .and(CategoriaSpecifications.fgAtivoIgual(true)));
 
@@ -63,7 +65,7 @@ public class CategoriaService extends CrudService<Categoria, BigInteger, Categor
 	@Override
 	public void validarInserir(Categoria entity) throws Exception
 	{
-		Integer quantidade = getRepository().quantidadePorDescricao(entity.getDsCategoria(), entity.getTpCategoria());
+		Integer quantidade = getRepository().quantidadePorDescricao(entity.getDsCategoria(), entity.getTpCategoria(), entity.getIdUsuario());
 
 		if (quantidade != null && quantidade > 0)
 		{
@@ -75,7 +77,7 @@ public class CategoriaService extends CrudService<Categoria, BigInteger, Categor
 	public void validarAlterar(Categoria entity) throws Exception
 	{
 		Integer quantidade = getRepository().quantidadePorDescricao(entity.getDsCategoria(), entity.getTpCategoria(),
-				entity.getIdCategoria());
+				entity.getIdCategoria(), entity.getIdUsuario());
 
 		if (quantidade != null && quantidade > 0)
 		{
@@ -90,8 +92,9 @@ public class CategoriaService extends CrudService<Categoria, BigInteger, Categor
 		filter.setParameter("flgAtivoSubcategoria", true);
 
 		List<Categoria> lista = getRepository().findAll(Specification.where(CategoriaSpecifications.fetchSubcategoria())
-				.and(CategoriaSpecifications.tpCategoriaIgual(categoria.getTpCategoria()))
-				.and(CategoriaSpecifications.fgAtivoIgual(categoria.getFgAtivo())));
+                                                         				.and(CategoriaSpecifications.tpCategoriaIgual(categoria.getTpCategoria()))
+                                                         				.and(CategoriaSpecifications.idUsuarioIgual(categoria.getIdUsuario()))
+                                                         				.and(CategoriaSpecifications.fgAtivoIgual(categoria.getFgAtivo())));
 
 		entityManager.unwrap(Session.class).disableFilter("filtroFlgAtivoSubcategoria");
 		return lista;

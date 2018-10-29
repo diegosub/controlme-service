@@ -10,24 +10,25 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
 import br.com.cdtec.entity.Cartao;
+import br.com.cdtec.entity.Conta;
 
-public class CartaoSpecifications
+public class ContaSpecifications
 {
 
-   private CartaoSpecifications()
+   private ContaSpecifications()
    {
    }
 
    @SuppressWarnings("serial")
-   public static Specification<Cartao> dsCartaoLike(final String dsCartao)
+   public static Specification<Conta> dsCartaoLike(final String dsConta)
    {
-      return new Specification<Cartao>()
+      return new Specification<Conta>()
       {
-         public Predicate toPredicate(Root<Cartao> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         public Predicate toPredicate(Root<Conta> root, CriteriaQuery<?> query, CriteriaBuilder cb)
          {
-            if (dsCartao != null && !dsCartao.trim().equals(""))
+            if (dsConta != null && !dsConta.trim().equals(""))
             {
-               return cb.like(cb.lower(root.get("dsCartao")), "%" + dsCartao.toLowerCase() + "%");
+               return cb.like(cb.lower(root.get("dsConta")), "%" + dsConta.toLowerCase() + "%");
             }
 
             return null;
@@ -36,13 +37,13 @@ public class CartaoSpecifications
    }
 
    @SuppressWarnings("serial")
-   public static Specification<Cartao> fgAtivoIgual(final Boolean fgAtivo)
+   public static Specification<Conta> fgAtivoIgual(final Boolean fgAtivo)
    {
-      return new Specification<Cartao>()
+      return new Specification<Conta>()
       {
-         public Predicate toPredicate(Root<Cartao> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         public Predicate toPredicate(Root<Conta> root, CriteriaQuery<?> query, CriteriaBuilder cb)
          {
-            if (fgAtivo != null && !fgAtivo.toString().equals("") && !fgAtivo.toString().equals("T"))
+            if (fgAtivo != null && !fgAtivo.toString().equals(""))
             {
                return cb.equal(root.get("fgAtivo"), fgAtivo);
             }
@@ -53,11 +54,11 @@ public class CartaoSpecifications
    }
    
    @SuppressWarnings("serial")
-   public static Specification<Cartao> fgPrincipalIgual(final Boolean fgPrincipal)
+   public static Specification<Conta> fgPrincipalIgual(final Boolean fgPrincipal)
    {
-      return new Specification<Cartao>()
+      return new Specification<Conta>()
       {
-         public Predicate toPredicate(Root<Cartao> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         public Predicate toPredicate(Root<Conta> root, CriteriaQuery<?> query, CriteriaBuilder cb)
          {
             if (fgPrincipal != null && !fgPrincipal.toString().equals(""))
             {
@@ -70,11 +71,11 @@ public class CartaoSpecifications
    }
    
    @SuppressWarnings("serial")
-   public static Specification<Cartao> idUsuarioIgual(final BigInteger idUsuario)
+   public static Specification<Conta> idUsuarioIgual(final BigInteger idUsuario)
    {
-      return new Specification<Cartao>()
+      return new Specification<Conta>()
       {
-         public Predicate toPredicate(Root<Cartao> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         public Predicate toPredicate(Root<Conta> root, CriteriaQuery<?> query, CriteriaBuilder cb)
          {
             if (idUsuario != null && !idUsuario.toString().equals(""))
             {

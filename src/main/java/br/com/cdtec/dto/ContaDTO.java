@@ -4,56 +4,71 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
-public class CartaoDTO implements Serializable
+public class ContaDTO implements Serializable
 {
    private static final long serialVersionUID = 1L;
 
-   private BigInteger idCartao;
+   private BigInteger idConta;
 
-   private String dsCartao;
+   private String dsConta;
 
-   private Integer nrDiaCorte;
-
+   private Double vlSaldo;
+   
+   private BigInteger idTipoConta;
+   
    private BigInteger idUsuario;
 
    private Boolean fgAtivo;
 
-   private Boolean fgPrincipal;
-
    private Date dtCadastro;
 
    private Date dtAlteracao;
-
+   
    private String fgControle;
+   
+   private Boolean fgPrincipal;
+   
+   private String strVlSaldo;
 
-   public BigInteger getIdCartao()
+
+   public BigInteger getIdConta()
    {
-      return idCartao;
+      return idConta;
    }
 
-   public void setIdCartao(BigInteger idCartao)
+   public void setIdConta(BigInteger idConta)
    {
-      this.idCartao = idCartao;
+      this.idConta = idConta;
    }
 
-   public String getDsCartao()
+   public String getDsConta()
    {
-      return dsCartao;
+      return dsConta;
    }
 
-   public void setDsCartao(String dsCartao)
+   public void setDsConta(String dsConta)
    {
-      this.dsCartao = dsCartao;
+      this.dsConta = dsConta;
    }
 
-   public Integer getNrDiaCorte()
+   public Double getVlSaldo()
    {
-      return nrDiaCorte;
+      return vlSaldo;
    }
 
-   public void setNrDiaCorte(Integer nrDiaCorte)
+   public void setVlSaldo(Double vlSaldo)
    {
-      this.nrDiaCorte = nrDiaCorte;
+      this.vlSaldo = vlSaldo;
+   }
+
+   public BigInteger getIdTipoConta()
+   {
+      return idTipoConta;
+   }
+
+   public void setIdTipoConta(BigInteger idTipoConta)
+   {
+      this.idTipoConta = idTipoConta;
    }
 
    public BigInteger getIdUsuario()
@@ -114,5 +129,15 @@ public class CartaoDTO implements Serializable
    public void setFgPrincipal(Boolean fgPrincipal)
    {
       this.fgPrincipal = fgPrincipal;
+   }
+
+   public String getStrVlSaldo()
+   {
+      return strVlSaldo;
+   }
+
+   public void setStrVlSaldo(String strVlSaldo)
+   {
+      this.strVlSaldo = strVlSaldo;
    }
 }

@@ -40,6 +40,7 @@ public abstract class CrudService<Entity, IdClass extends Serializable, Reposito
 	public Entity inserir(Entity entity) throws Exception
 	{
 		validarInserir(entity);
+		completarInserir(entity);
 		getRepository().save(entity);
 		return entity;
 	}
@@ -48,6 +49,7 @@ public abstract class CrudService<Entity, IdClass extends Serializable, Reposito
 	public Entity alterar(Entity entity) throws Exception
 	{
 		validarAlterar(entity);
+		completarAlterar(entity);
 		getRepository().save(entity);
 		return entity;
 	}
@@ -73,6 +75,14 @@ public abstract class CrudService<Entity, IdClass extends Serializable, Reposito
 		return null;
 	}
 
+	public void completarInserir(Entity entity) throws Exception
+    {
+    }
+	
+	public void completarAlterar(Entity entity) throws Exception
+    {
+    }
+	
 	public void validarInserir(Entity entity) throws Exception
 	{
 	}

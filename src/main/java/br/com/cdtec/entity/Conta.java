@@ -17,37 +17,37 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Proxy;
 
 @Entity
-@Table(name = "tb_cartao", schema = "ngc")
-@SequenceGenerator(name = "SQ_CARTAO", sequenceName = "SQ_CARTAO", allocationSize = 1)
+@Table(name = "tb_conta", schema = "ngc")
+@SequenceGenerator(name = "SQ_CONTA", sequenceName = "SQ_CONTA", allocationSize = 1)
 @Proxy(lazy = true)
-public class Cartao implements Serializable
+public class Conta implements Serializable
 {
 
    private static final long serialVersionUID = 1L;
 
    @Id
-   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_CARTAO")
-   @Column(name = "id_cartao")
-   private BigInteger idCartao;
+   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_CONTA")
+   @Column(name = "id_conta")
+   private BigInteger idConta;
 
-   @Column(name = "ds_cartao")
-   private String dsCartao;
+   @Column(name = "ds_conta")
+   private String dsConta;
 
-   @Column(name = "nr_dia_corte")
-   private Integer nrDiaCorte;
+   @Column(name = "id_tipo_conta")
+   private BigInteger idTipoConta;
 
-   @Column(name = "nr_dia_vencimento")
-   private Integer nrDiaVencimento;
-   
+   @Column(name = "vl_saldo")
+   private Double vlSaldo;
+
    @Column(name = "id_usuario")
    private BigInteger idUsuario;
+
+   @Column(name = "fg_ativo")
+   private Boolean fgAtivo;
 
    @Column(name = "fg_principal")
    private Boolean fgPrincipal;
    
-   @Column(name = "fg_ativo")
-   private Boolean fgAtivo;
-
    @Temporal(TemporalType.TIMESTAMP)
    @Column(name = "dt_cadastro")
    private Date dtCadastro;
@@ -56,24 +56,44 @@ public class Cartao implements Serializable
    @Column(name = "dt_alteracao")
    private Date dtAlteracao;
 
-   public BigInteger getIdCartao()
+   public BigInteger getIdConta()
    {
-      return idCartao;
+      return idConta;
    }
 
-   public void setIdCartao(BigInteger idCartao)
+   public void setIdConta(BigInteger idConta)
    {
-      this.idCartao = idCartao;
+      this.idConta = idConta;
    }
 
-   public String getDsCartao()
+   public String getDsConta()
    {
-      return dsCartao;
+      return dsConta;
    }
 
-   public void setDsCartao(String dsCartao)
+   public void setDsConta(String dsConta)
    {
-      this.dsCartao = dsCartao;
+      this.dsConta = dsConta;
+   }
+
+   public BigInteger getIdTipoConta()
+   {
+      return idTipoConta;
+   }
+
+   public void setIdTipoConta(BigInteger idTipoConta)
+   {
+      this.idTipoConta = idTipoConta;
+   }
+
+   public Double getVlSaldo()
+   {
+      return vlSaldo;
+   }
+
+   public void setVlSaldo(Double vlSaldo)
+   {
+      this.vlSaldo = vlSaldo;
    }
 
    public BigInteger getIdUsuario()
@@ -114,26 +134,6 @@ public class Cartao implements Serializable
    public void setDtAlteracao(Date dtAlteracao)
    {
       this.dtAlteracao = dtAlteracao;
-   }
-
-   public Integer getNrDiaCorte()
-   {
-      return nrDiaCorte;
-   }
-
-   public void setNrDiaCorte(Integer nrDiaCorte)
-   {
-      this.nrDiaCorte = nrDiaCorte;
-   }
-
-   public Integer getNrDiaVencimento()
-   {
-      return nrDiaVencimento;
-   }
-
-   public void setNrDiaVencimento(Integer nrDiaVencimento)
-   {
-      this.nrDiaVencimento = nrDiaVencimento;
    }
 
    public Boolean getFgPrincipal()
