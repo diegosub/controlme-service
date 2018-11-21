@@ -21,5 +21,8 @@ public interface ContaRepository extends GenericRepository<Conta, BigInteger>
 
 	@Query("SELECT count(c) FROM Conta c WHERE c.dsConta = :dsConta AND c.idConta <> :idConta AND c.idUsuario = :idUsuario")
 	Integer quantidadePorDescricao(@Param("dsConta") String dsConta, @Param("idConta") BigInteger idConta, @Param("idUsuario") BigInteger idUsuario);
+	
+	@Query("SELECT count(c) FROM Conta c WHERE c.idUsuario = :idUsuario AND c.fgPrincipal = true")
+    Integer quantidadePrincipal(@Param("idUsuario") BigInteger idUsuario);
 
 }

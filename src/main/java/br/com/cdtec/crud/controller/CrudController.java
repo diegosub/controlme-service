@@ -136,14 +136,14 @@ public class CrudController<Entity, IdClass extends Serializable, Service extend
          this.validarPesquisar(entity);
          this.completarPesquisar(entity, request);
          List<Entity> lista = getService().pesquisar(entity, sortField());
-         
-         if(lista != null)
+
+         if (lista != null)
          {
             lista = (List<Entity>) new RetirarLazy<List<Entity>>(lista).execute();
             List<Object> listaRetorno = this.atualizarListaResponse(lista);
             response.setData(listaRetorno);
          }
-         
+
          return ResponseEntity.ok(response);
       }
       catch (Exception e)

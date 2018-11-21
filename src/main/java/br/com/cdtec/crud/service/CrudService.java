@@ -1,9 +1,14 @@
 package br.com.cdtec.crud.service;
 
 import java.io.Serializable;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.Session;
+import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -74,6 +79,20 @@ public abstract class CrudService<Entity, IdClass extends Serializable, Reposito
 	{
 		return null;
 	}
+	
+   public void executeComando(Session session, final String cmdSql) throws Exception
+   {
+      session.doWork(new Work()
+      {
+         @Override
+         public void execute(Connection conn) throws SQLException
+         {
+            CallableStatement cs = conn.prepareCall("{call " + cmdSql + "}");
+            cs.execute();
+            cs.close();
+         }
+      });
+   }
 
 	public void completarInserir(Entity entity) throws Exception
     {

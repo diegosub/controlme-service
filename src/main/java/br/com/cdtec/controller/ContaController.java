@@ -37,6 +37,24 @@ public class ContaController extends CrudController<Conta, BigInteger, ContaServ
 
    private static final long serialVersionUID = 1L;
 
+   @PostMapping(path = "/listarContas")
+   public ResponseEntity<Response<List<Conta>>> listarContas(HttpServletRequest request, @RequestBody Conta conta)
+   {
+       Response<List<Conta>> response = new Response<List<Conta>>();
+       try
+       {
+           List<Conta> lista = getService().pesquisar(conta, this.sortField());
+           lista = (List<Conta>) new RetirarLazy<List<Conta>>(lista).execute();
+           response.setData(lista);
+           return ResponseEntity.ok(response);
+       }
+       catch (Exception e)
+       {
+           response.getErrors().add(e.getMessage());
+           return ResponseEntity.badRequest().body(response);
+       }
+   }
+   
    @PostMapping(path = "/pesquisarInativos")
    public ResponseEntity<Response<List<Conta>>> pesquisarInativos(HttpServletRequest request, @RequestBody Conta conta)
    {
