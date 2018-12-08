@@ -1,6 +1,7 @@
 package br.com.cdtec.dao.specifications;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -34,17 +35,18 @@ public class TransferenciaSpecifications
          }
       };
    }
-
+   
    @SuppressWarnings("serial")
-   public static Specification<Transferencia> fgAtivoIgual(final Boolean fgAtivo)
+   public static Specification<Transferencia> dtTransferenciaBetween(final Date dtTransferenciaInicio, final Date dtTransferenciaFim)
    {
       return new Specification<Transferencia>()
       {
          public Predicate toPredicate(Root<Transferencia> root, CriteriaQuery<?> query, CriteriaBuilder cb)
          {
-            if (fgAtivo != null && !fgAtivo.toString().equals(""))
+            if (dtTransferenciaInicio != null && !dtTransferenciaInicio.toString().equals("")
+                  && dtTransferenciaFim != null && !dtTransferenciaFim.toString().equals(""))
             {
-               return cb.equal(root.get("fgAtivo"), fgAtivo);
+               return cb.between(root.get("dtTransferencia"), dtTransferenciaInicio, dtTransferenciaFim); 
             }
 
             return null;

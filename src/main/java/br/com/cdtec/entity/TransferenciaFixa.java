@@ -6,15 +6,21 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Proxy;
+
+import br.com.cdtec.entity.filter.FiltroTransferencia;
 
 @Entity
 @Table(name = "tb_transferencia_fixa", schema = "ngc")
@@ -34,9 +40,17 @@ public class TransferenciaFixa implements Serializable
 
    @Column(name = "id_conta_origem")
    private BigInteger idContaOrigem;
+   
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "id_conta_origem", insertable = false, updatable = false)
+   private Conta contaOrigem;
 
    @Column(name = "id_conta_destino")
    private BigInteger idContaDestino;
+   
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "id_conta_destino", insertable = false, updatable = false)
+   private Conta contaDestino;
 
    @Column(name = "vl_transferencia")
    private Double vlTransferencia;
@@ -56,6 +70,10 @@ public class TransferenciaFixa implements Serializable
    
    @Column(name = "dt_alteracao")
    private Date dtAlteracao;
+   
+   @Transient
+   private FiltroTransferencia filtro;
+   
 
    public BigInteger getIdTransferenciaFixa()
    {
@@ -155,5 +173,35 @@ public class TransferenciaFixa implements Serializable
    public void setDtAlteracao(Date dtAlteracao)
    {
       this.dtAlteracao = dtAlteracao;
+   }
+
+   public FiltroTransferencia getFiltro()
+   {
+      return filtro;
+   }
+
+   public void setFiltro(FiltroTransferencia filtro)
+   {
+      this.filtro = filtro;
+   }
+
+   public Conta getContaOrigem()
+   {
+      return contaOrigem;
+   }
+
+   public void setContaOrigem(Conta contaOrigem)
+   {
+      this.contaOrigem = contaOrigem;
+   }
+
+   public Conta getContaDestino()
+   {
+      return contaDestino;
+   }
+
+   public void setContaDestino(Conta contaDestino)
+   {
+      this.contaDestino = contaDestino;
    }
 }

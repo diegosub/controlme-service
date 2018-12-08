@@ -69,6 +69,10 @@ public class Movimentacao implements Serializable
    @Temporal(TemporalType.TIMESTAMP)
    @Column(name = "dt_cadastro")
    private Date dtCadastro;
+   
+   @Temporal(TemporalType.TIMESTAMP)
+   @Column(name = "dt_alteracao")
+   private Date dtAlteracao;
 
    public BigInteger getIdMovimentacao()
    {
@@ -169,4 +173,15 @@ public class Movimentacao implements Serializable
    {
       this.dtCadastro = dtCadastro;
    }
+
+   public Date getDtAlteracao()
+   {
+      return dtAlteracao;
+   }
+
+   public void setDtAlteracao(Date dtAlteracao)
+   {
+      this.dtAlteracao = dtAlteracao;
+   }
+   
 }

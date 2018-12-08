@@ -16,8 +16,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Proxy;
+
+import br.com.cdtec.entity.filter.FiltroTransferencia;
 
 @Entity
 @Table(name = "tb_transferencia", schema = "ngc")
@@ -62,12 +65,12 @@ public class Transferencia implements Serializable
 
    @Column(name = "ds_observacao")
    private String dsObservacao;
-
-   @Column(name = "fg_ativo")
-   private Boolean fgAtivo;
    
    @Column(name = "dt_alteracao")
    private Date dtAlteracao;
+   
+   @Transient
+   private FiltroTransferencia filtro;
    
    
    public BigInteger getIdTransferencia()
@@ -150,16 +153,6 @@ public class Transferencia implements Serializable
       this.dsObservacao = dsObservacao;
    }
 
-   public Boolean getFgAtivo()
-   {
-      return fgAtivo;
-   }
-
-   public void setFgAtivo(Boolean fgAtivo)
-   {
-      this.fgAtivo = fgAtivo;
-   }
-
    public Date getDtAlteracao()
    {
       return dtAlteracao;
@@ -188,5 +181,15 @@ public class Transferencia implements Serializable
    public void setContaDestino(Conta contaDestino)
    {
       this.contaDestino = contaDestino;
+   }
+
+   public FiltroTransferencia getFiltro()
+   {
+      return filtro;
+   }
+
+   public void setFiltro(FiltroTransferencia filtro)
+   {
+      this.filtro = filtro;
    }
 }

@@ -53,13 +53,42 @@ public class TransferenciaService extends CrudService<Transferencia, BigInteger,
       return transferencia;
    }
 
+   @Transactional
+   public void excluirDefinitivamente(BigInteger idTransferencia) throws Exception
+   {
+      movimentacaoService.excluirMovimentacaoTransferencia(idTransferencia);
+   }
+   
+   @Override
+   @Transactional
+   public Transferencia alterar(Transferencia transferencia) throws Exception
+   {
+      validarAlterar(transferencia);
+      completarAlterar(transferencia);
+
+      // ALTERANDO TRANSFERENCIA
+      getRepository().save(transferencia);
+
+      // ALTERANDO MOVIMENTACAO
+      String dtMovimentacao = DataCustom.getDataSql(transferencia.getDtTransferencia(),
+      DataCustom.SQL_DATE);
+      
+      movimentacaoService.alterarMovimentacaoTransferencia(transferencia.getIdUsuario(), transferencia.getVlTransferencia(),
+                                                           transferencia.getIdContaOrigem(), transferencia.getIdContaDestino(), 
+                                                           transferencia.getIdTransferencia(), new BigInteger(String.valueOf(2)), dtMovimentacao);
+
+      return transferencia;
+   }
+   
+   
+   
    @Override
    public List<Transferencia> implementarPesquisar(Transferencia transferencia, Sort sort) throws Exception
    {
       List<Transferencia> lista = getRepository().findAll(Specification.where(TransferenciaSpecifications.idUsuarioIgual(transferencia.getIdUsuario()))
+                                                                         .and(TransferenciaSpecifications.dtTransferenciaBetween(transferencia.getFiltro().getDtTransferenciaInicio(), transferencia.getFiltro().getDtTransferenciaFim()))
                                                                          .and(TransferenciaSpecifications.fetchContaOrigem())
-                                                                         .and(TransferenciaSpecifications.fetchContaDestino())
-                                                                         .and(TransferenciaSpecifications.fgAtivoIgual(transferencia.getFgAtivo())));
+                                                                         .and(TransferenciaSpecifications.fetchContaDestino()), sort);
       
       return lista;
    }

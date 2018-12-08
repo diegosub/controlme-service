@@ -21,7 +21,7 @@ public class SubcategoriaService extends CrudService<Subcategoria, BigInteger, S
 
 	@Override
 	public void validarInserir(Subcategoria entity) throws Exception {
-		Integer quantidade = getRepository().quantidadePorDescricao(entity.getDsSubcategoria());
+		Integer quantidade = getRepository().quantidadePorDescricao(entity.getDsSubcategoria(), entity.getIdCategoria());
 		
 		if(quantidade != null
 				&& quantidade > 0) {
@@ -31,7 +31,7 @@ public class SubcategoriaService extends CrudService<Subcategoria, BigInteger, S
 	
 	@Override
 	public void validarAlterar(Subcategoria entity) throws Exception {
-		Integer quantidade = getRepository().quantidadePorDescricao(entity.getDsSubcategoria(), entity.getIdSubcategoria());
+		Integer quantidade = getRepository().quantidadePorDescricao(entity.getDsSubcategoria(), entity.getIdSubcategoria(), entity.getIdCategoria());
 		
 		if(quantidade != null
 				&& quantidade > 0) {
