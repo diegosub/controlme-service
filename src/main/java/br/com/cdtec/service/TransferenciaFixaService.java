@@ -29,7 +29,8 @@ public class TransferenciaFixaService extends CrudService<TransferenciaFixa, Big
    public List<TransferenciaFixa> implementarPesquisar(TransferenciaFixa transferenciaFixa, Sort sort) throws Exception
    {
       List<TransferenciaFixa> lista = getRepository().findAll(Specification.where(TransferenciaFixaSpecifications.idUsuarioIgual(transferenciaFixa.getIdUsuario()))
-                                                                           .and(TransferenciaFixaSpecifications.fetchContaOrigem())
+    		  															   .and(TransferenciaFixaSpecifications.fgAtivoIgual(true))
+    		  															   .and(TransferenciaFixaSpecifications.fetchContaOrigem())
                                                                            .and(TransferenciaFixaSpecifications.fetchContaDestino()), sort);
       
       return lista;

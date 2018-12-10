@@ -2,6 +2,7 @@ package br.com.cdtec.controller;
 
 import java.math.BigInteger;
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,6 +58,13 @@ public class TransferenciaFixaController extends CrudController<TransferenciaFix
          return;
       }
    }
+   
+	@Override
+	protected void atualizarStatusEntidade(TransferenciaFixa entity, Boolean status)
+	{
+		entity.setFgAtivo(status);
+		entity.setDtAlteracao(new Date());
+	}
 
    @Override
    protected List<Object> atualizarListaResponse(List<TransferenciaFixa> lista)

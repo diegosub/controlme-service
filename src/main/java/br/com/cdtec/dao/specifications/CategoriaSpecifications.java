@@ -11,7 +11,6 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import br.com.cdtec.entity.Cartao;
 import br.com.cdtec.entity.Categoria;
 
 public class CategoriaSpecifications

@@ -1,7 +1,6 @@
 package br.com.cdtec.dao.specifications;
 
 import java.math.BigInteger;
-import java.util.Date;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -71,6 +70,23 @@ public class TransferenciaFixaSpecifications
             {
                root.join("contaDestino");
             }
+            return null;
+         }
+      };
+   }
+   
+   @SuppressWarnings("serial")
+   public static Specification<TransferenciaFixa> fgAtivoIgual(final Boolean fgAtivo)
+   {
+      return new Specification<TransferenciaFixa>()
+      {
+         public Predicate toPredicate(Root<TransferenciaFixa> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         {
+            if (fgAtivo != null && !fgAtivo.toString().equals(""))
+            {
+               return cb.equal(root.get("fgAtivo"), fgAtivo);
+            }
+
             return null;
          }
       };
