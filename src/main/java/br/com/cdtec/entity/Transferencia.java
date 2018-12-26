@@ -59,7 +59,6 @@ public class Transferencia implements Serializable
    @Column(name = "dt_cadastro")
    private Date dtCadastro;
 
-   @Temporal(TemporalType.DATE)
    @Column(name = "dt_transferencia")
    private Date dtTransferencia;
 

@@ -38,14 +38,21 @@ public class ContaController extends CrudController<Conta, BigInteger, ContaServ
    private static final long serialVersionUID = 1L;
 
    @PostMapping(path = "/listarContas")
-   public ResponseEntity<Response<List<Conta>>> listarContas(HttpServletRequest request, @RequestBody Conta conta)
+   public ResponseEntity<Response<List<ContaDTO>>> listarContas(HttpServletRequest request, @RequestBody Conta conta)
    {
-       Response<List<Conta>> response = new Response<List<Conta>>();
+       Response<List<ContaDTO>> response = new Response<List<ContaDTO>>();
        try
        {
            List<Conta> lista = getService().pesquisar(conta, this.sortField());
-           lista = (List<Conta>) new RetirarLazy<List<Conta>>(lista).execute();
-           response.setData(lista);
+           lista = (List<Conta>) new RetirarLazy<List<Conta>>(lista).execute();           
+           List<ContaDTO> listaRetorno = lista.stream().map(objeto -> convertToDto(objeto)).collect(Collectors.toList());
+           
+           for (ContaDTO contaDTO : listaRetorno)
+		   {
+        	  contaDTO.setStrVlSaldo(new DecimalFormat("#,##0.00").format(contaDTO.getVlSaldo()));
+		   }
+           
+           response.setData(listaRetorno);
            return ResponseEntity.ok(response);
        }
        catch (Exception e)

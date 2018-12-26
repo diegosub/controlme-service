@@ -50,6 +50,25 @@ public class CategoriaController extends CrudController<Categoria, BigInteger, C
 		}
 	}
 	
+	@PostMapping(path = "/listarAll")
+	public ResponseEntity<Response<List<Object>>> pesquisarInativos(HttpServletRequest request, @RequestBody Categoria categoria)
+	{
+		Response<List<Object>> response = new Response<List<Object>>();
+		try
+		{
+			List<Categoria> lista = getService().pesquisarInativos(categoria);
+			lista = (List<Categoria>) new RetirarLazy<List<Categoria>>(lista).execute();
+			List<Object> listaRetorno = this.atualizarListaResponse(lista);
+			response.setData(listaRetorno);
+			return ResponseEntity.ok(response);
+		}
+		catch (Exception e)
+		{
+			response.getErrors().add(e.getMessage());
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
+	
 	@Override
 	protected void completarInserir(Categoria entity, HttpServletRequest request)
 	{
