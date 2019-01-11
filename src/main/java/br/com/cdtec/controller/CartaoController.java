@@ -36,6 +36,25 @@ public class CartaoController extends CrudController<Cartao, BigInteger, CartaoS
 
    private static final long serialVersionUID = 1L;
 
+   @PostMapping(path = "/listarCartoes")
+   public ResponseEntity<Response<List<CartaoDTO>>> listarCartoes(HttpServletRequest request, @RequestBody Cartao cartao)
+   {
+       Response<List<CartaoDTO>> response = new Response<List<CartaoDTO>>();
+       try
+       {
+           List<Cartao> lista = getService().pesquisar(cartao, this.sortField());
+           lista = (List<Cartao>) new RetirarLazy<List<Cartao>>(lista).execute();           
+           List<CartaoDTO> listaRetorno = lista.stream().map(objeto -> convertToDto(objeto)).collect(Collectors.toList());
+           response.setData(listaRetorno);
+           return ResponseEntity.ok(response);
+       }
+       catch (Exception e)
+       {
+           response.getErrors().add(e.getMessage());
+           return ResponseEntity.badRequest().body(response);
+       }
+   }
+   
    @PostMapping(path = "/pesquisarInativos")
    public ResponseEntity<Response<List<Cartao>>> pesquisarInativos(HttpServletRequest request, @RequestBody Cartao cartao)
    {

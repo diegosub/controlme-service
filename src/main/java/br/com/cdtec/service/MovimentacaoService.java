@@ -22,6 +22,8 @@ public class MovimentacaoService extends CrudService<Movimentacao, BigInteger, M
    private static final long serialVersionUID = 1L;
 
    public static final int TIPO_MOVIMENTACAO_CREDITO_CRIACAO_CONTA = 1;
+   public static final int TIPO_MOVIMENTACAO_DESPESA = 5;
+   
 
    /**
     * Metodo que chama a rotina para gerar uma movimentacao de entrada
@@ -153,6 +155,38 @@ public class MovimentacaoService extends CrudService<Movimentacao, BigInteger, M
    }
    
    /**
+    * Metodo que chama a rotina para alterar uma movimentacao de saida
+    * @param idUsuario
+    * @param idTipoMovimentacao
+    * @param vlDespesa
+    * @param idConta
+    * @param idNsuOrigem
+    * @param idOrigem
+    * @param dtMovimentacao
+    * @throws Exception
+    */
+   @Transactional
+   public void alterarMovimentacaoSaida(BigInteger idUsuario, Integer idTipoMovimentacao, Double vlDespesa, BigInteger idConta,
+                                        BigInteger idNsuOrigem, BigInteger idOrigem, String dtMovimentacao) throws Exception
+   {
+      Session sessao = this.em.unwrap(Session.class);
+      sessao.flush();
+      
+      String cmdSql = "ngc.alterar_movimentacao_saida("
+                      + idUsuario + ", "
+                      + idTipoMovimentacao + ", "
+                      + vlDespesa + ", "
+                      + idConta + ", "
+                      + idNsuOrigem + ", "
+                      + idOrigem + ", "
+                      + dtMovimentacao
+                      + ")";
+
+      super.executeComando(sessao, cmdSql);
+
+   }
+   
+   /**
     * Metodo que chama a rotina para excluir definitivamente uma movimentacao de transferencia
     * @param idTransferencia
     * @throws Exception
@@ -164,6 +198,22 @@ public class MovimentacaoService extends CrudService<Movimentacao, BigInteger, M
       sessao.flush();
       
       String cmdSql = "ngc.excluir_movimentacao_transferencia(" + idTransferencia + ")";
+      super.executeComando(sessao, cmdSql);
+
+   }
+   
+   /**
+    * Metodo que chama a rotina para inativar uma despesa (este metodo chama a rotina que deleta o registro da movimentacao e volta o saldo da conta)
+    * @param idDespesa
+    * @throws Exception
+    */
+   @Transactional
+   public void excluirMovimentacaoSaida(BigInteger idDespesa) throws Exception
+   {
+      Session sessao = this.em.unwrap(Session.class);
+      sessao.flush();
+      
+      String cmdSql = "ngc.excluir_movimentacao_saida(" + idDespesa + ")";
       super.executeComando(sessao, cmdSql);
 
    }

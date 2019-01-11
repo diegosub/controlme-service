@@ -19,6 +19,14 @@ public class SubcategoriaService extends CrudService<Subcategoria, BigInteger, S
 	private static final long serialVersionUID = 1L;	
 	private final String fieldSort = "dsCategoria";
 
+	public List<Subcategoria> listarTodasAtivas(Subcategoria subcategoria) throws Exception
+	{		
+		List<Subcategoria> lista = getRepository().findAll(Specification.where(SubcategoriaSpecifications.idCategoriaIgual(subcategoria.getIdCategoria()))
+																	      .and(SubcategoriaSpecifications.fgAtivoIgual(true)), new Sort(Sort.Direction.ASC, "dsSubcategoria"));		
+		
+		return lista;
+	}
+	
 	@Override
 	public void validarInserir(Subcategoria entity) throws Exception {
 		Integer quantidade = getRepository().quantidadePorDescricao(entity.getDsSubcategoria(), entity.getIdCategoria());

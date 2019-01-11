@@ -1,5 +1,7 @@
 package br.com.cdtec.dao.specifications;
 
+import java.math.BigInteger;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -20,6 +22,21 @@ public class SubcategoriaSpecifications {
 					CriteriaQuery<?> query, CriteriaBuilder cb) {
 				if(dsSubcategoria != null && !dsSubcategoria.trim().equals("")) {
 					return cb.like(cb.lower(root.get("dsSubcategoria")), "%"+dsSubcategoria.toLowerCase()+"%");
+				}
+				
+				return null;
+			}
+		};
+	}
+	
+
+	@SuppressWarnings("serial")
+	public static Specification<Subcategoria> idCategoriaIgual(final BigInteger idCategoria){
+		return new Specification<Subcategoria>() {
+			public Predicate toPredicate(Root<Subcategoria> root,
+					CriteriaQuery<?> query, CriteriaBuilder cb) {
+				if(idCategoria != null) {
+					return cb.equal(root.get("idCategoria"), idCategoria);
 				}
 				
 				return null;

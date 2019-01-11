@@ -50,13 +50,13 @@ public class CategoriaController extends CrudController<Categoria, BigInteger, C
 		}
 	}
 	
-	@PostMapping(path = "/listarAll")
-	public ResponseEntity<Response<List<Object>>> pesquisarInativos(HttpServletRequest request, @RequestBody Categoria categoria)
+	@PostMapping(path = "/listarTodasAtivas")
+	public ResponseEntity<Response<List<Object>>> listarTodasAtivas(HttpServletRequest request, @RequestBody Categoria categoria)
 	{
 		Response<List<Object>> response = new Response<List<Object>>();
 		try
 		{
-			List<Categoria> lista = getService().pesquisarInativos(categoria);
+			List<Categoria> lista = getService().listarTodasAtivas(categoria);
 			lista = (List<Categoria>) new RetirarLazy<List<Categoria>>(lista).execute();
 			List<Object> listaRetorno = this.atualizarListaResponse(lista);
 			response.setData(listaRetorno);

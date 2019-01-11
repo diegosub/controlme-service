@@ -20,21 +20,21 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Proxy;
 
-import br.com.cdtec.entity.filter.FiltroDespesa;
+import br.com.cdtec.entity.filter.FiltroDespesaCartao;
 
 @Entity
-@Table(name = "tb_despesa", schema = "ngc")
-@SequenceGenerator(name = "SQ_DESPESA", sequenceName = "SQ_DESPESA", allocationSize = 1)
+@Table(name = "tb_despesa_cartao", schema = "ngc")
+@SequenceGenerator(name = "SQ_DESPESA_CARTAO", sequenceName = "SQ_DESPESA_CARTAO", allocationSize = 1)
 @Proxy(lazy = true)
-public class Despesa implements Serializable
+public class DespesaCartao implements Serializable
 {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_DESPESA")
-	@Column(name = "id_despesa")
-	private BigInteger idDespesa;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_DESPESA_CARTAO")
+	@Column(name = "id_despesa_cartao")
+	private BigInteger idDespesaCartao;
 
 	@Column(name = "id_categoria")
 	private BigInteger idCategoria;
@@ -50,12 +50,12 @@ public class Despesa implements Serializable
 	@JoinColumn(name = "id_subcategoria", insertable = false, updatable = false)
 	private Subcategoria subcategoria;
 	
-	@Column(name = "id_conta")
-	private BigInteger idConta;
+	@Column(name = "id_cartao")
+	private BigInteger idCartao;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_conta", insertable = false, updatable = false)
-	private Conta conta;
+	@JoinColumn(name = "id_cartao", insertable = false, updatable = false)
+	private Cartao cartao;
 
 	@Column(name = "dt_despesa")
 	private Date dtDespesa;
@@ -81,17 +81,16 @@ public class Despesa implements Serializable
 	private Date dtAlteracao;
 	
 	@Transient
-	private FiltroDespesa filtro;
-	   
+	private FiltroDespesaCartao filtro;
 
-	public BigInteger getIdDespesa()
+	public BigInteger getIdDespesaCartao()
 	{
-		return idDespesa;
+		return idDespesaCartao;
 	}
 
-	public void setIdDespesa(BigInteger idDespesa)
+	public void setIdDespesaCartao(BigInteger idDespesaCartao)
 	{
-		this.idDespesa = idDespesa;
+		this.idDespesaCartao = idDespesaCartao;
 	}
 
 	public BigInteger getIdCategoria()
@@ -104,6 +103,16 @@ public class Despesa implements Serializable
 		this.idCategoria = idCategoria;
 	}
 
+	public Categoria getCategoria()
+	{
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria)
+	{
+		this.categoria = categoria;
+	}
+
 	public BigInteger getIdSubcategoria()
 	{
 		return idSubcategoria;
@@ -114,14 +123,34 @@ public class Despesa implements Serializable
 		this.idSubcategoria = idSubcategoria;
 	}
 
-	public BigInteger getIdConta()
+	public Subcategoria getSubcategoria()
 	{
-		return idConta;
+		return subcategoria;
 	}
 
-	public void setIdConta(BigInteger idConta)
+	public void setSubcategoria(Subcategoria subcategoria)
 	{
-		this.idConta = idConta;
+		this.subcategoria = subcategoria;
+	}
+
+	public BigInteger getIdCartao()
+	{
+		return idCartao;
+	}
+
+	public void setIdCartao(BigInteger idCartao)
+	{
+		this.idCartao = idCartao;
+	}
+
+	public Cartao getCartao()
+	{
+		return cartao;
+	}
+
+	public void setCartao(Cartao cartao)
+	{
+		this.cartao = cartao;
 	}
 
 	public Date getDtDespesa()
@@ -194,42 +223,12 @@ public class Despesa implements Serializable
 		this.dtAlteracao = dtAlteracao;
 	}
 
-	public Categoria getCategoria()
-	{
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria)
-	{
-		this.categoria = categoria;
-	}
-
-	public Subcategoria getSubcategoria()
-	{
-		return subcategoria;
-	}
-
-	public void setSubcategoria(Subcategoria subcategoria)
-	{
-		this.subcategoria = subcategoria;
-	}
-
-	public Conta getConta()
-	{
-		return conta;
-	}
-
-	public void setConta(Conta conta)
-	{
-		this.conta = conta;
-	}
-
-	public FiltroDespesa getFiltro()
+	public FiltroDespesaCartao getFiltro()
 	{
 		return filtro;
 	}
 
-	public void setFiltro(FiltroDespesa filtro)
+	public void setFiltro(FiltroDespesaCartao filtro)
 	{
 		this.filtro = filtro;
 	}

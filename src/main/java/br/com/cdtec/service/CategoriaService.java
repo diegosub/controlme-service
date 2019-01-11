@@ -26,6 +26,8 @@ public class CategoriaService extends CrudService<Categoria, BigInteger, Categor
 
 	private static final long serialVersionUID = 1L;
 
+	private final String fieldSort = "dsCategoria";
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -58,6 +60,15 @@ public class CategoriaService extends CrudService<Categoria, BigInteger, Categor
             }
         });
 		
+		
+		return lista;
+	}
+	
+	public List<Categoria> listarTodasAtivas(Categoria categoria) throws Exception
+	{		
+		List<Categoria> lista = getRepository().findAll(Specification.where(CategoriaSpecifications.idUsuarioIgual(categoria.getIdUsuario()))
+																	 .and(CategoriaSpecifications.tpCategoriaIgual(categoria.getTpCategoria()))
+																	 .and(CategoriaSpecifications.fgAtivoIgual(true)), new Sort(Sort.Direction.ASC, this.fieldSort));		
 		
 		return lista;
 	}
@@ -98,6 +109,11 @@ public class CategoriaService extends CrudService<Categoria, BigInteger, Categor
 
 		entityManager.unwrap(Session.class).disableFilter("filtroFlgAtivoSubcategoria");
 		return lista;
+	}
+
+	public String getFieldSort()
+	{
+		return fieldSort;
 	}
 
 }
