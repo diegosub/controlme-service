@@ -20,6 +20,8 @@ public class DespesaAgendamentoHeaderDTO implements Serializable
 	private SubcategoriaDTO subcategoria;
 
 	private Date dtInicio;
+	
+	private String tpDespesaAgh;
 
 	private Double vlDespesaAgh;
 	
@@ -176,5 +178,15 @@ public class DespesaAgendamentoHeaderDTO implements Serializable
 	public void setNrPeriodo(Integer nrPeriodo)
 	{
 		this.nrPeriodo = nrPeriodo;
+	}
+
+	public String getTpDespesaAgh()
+	{
+		return tpDespesaAgh;
+	}
+
+	public void setTpDespesaAgh(String tpDespesaAgh)
+	{
+		this.tpDespesaAgh = tpDespesaAgh;
 	}
 }

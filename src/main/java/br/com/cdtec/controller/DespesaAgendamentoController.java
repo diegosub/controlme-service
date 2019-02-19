@@ -94,7 +94,7 @@ public class DespesaAgendamentoController extends CrudController<DespesaAgendame
 	{
 		DespesaAgendamentoHeaderDTO dto = new DespesaAgendamentoHeaderDTO();
 		modelMapper.map(despesa, dto);
-		dto.setStrVlDespesaAgh(new DecimalFormat("#,##0.00").format(dto.getStrVlDespesaAgh()));
+		dto.setStrVlDespesaAgh(new DecimalFormat("#,##0.00").format(dto.getVlDespesaAgh()));
 
 		return dto;
 	}

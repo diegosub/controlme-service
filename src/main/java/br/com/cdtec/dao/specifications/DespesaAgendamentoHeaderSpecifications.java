@@ -55,6 +55,23 @@ public class DespesaAgendamentoHeaderSpecifications
    }
    
    @SuppressWarnings("serial")
+   public static Specification<DespesaAgendamentoHeader> tpDespesaIgual(final String tpDespesaAgh)
+   {
+      return new Specification<DespesaAgendamentoHeader>()
+      {
+         public Predicate toPredicate(Root<DespesaAgendamentoHeader> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         {
+            if (tpDespesaAgh != null && !tpDespesaAgh.toString().equals(""))
+            {
+               return cb.equal(root.get("tpDespesaAgh"), tpDespesaAgh);
+            }
+
+            return null;
+         }
+      };
+   }
+   
+   @SuppressWarnings("serial")
    public static Specification<DespesaAgendamentoHeader> fetchCategoria()
    {
       return new Specification<DespesaAgendamentoHeader>()
