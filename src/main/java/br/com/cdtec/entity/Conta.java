@@ -22,7 +22,6 @@ import org.hibernate.annotations.Proxy;
 @Proxy(lazy = true)
 public class Conta implements Serializable
 {
-
    private static final long serialVersionUID = 1L;
 
    @Id

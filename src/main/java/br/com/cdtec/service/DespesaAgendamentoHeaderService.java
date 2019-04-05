@@ -29,7 +29,6 @@ public class DespesaAgendamentoHeaderService extends CrudService<DespesaAgendame
    public List<DespesaAgendamentoHeader> implementarPesquisar(DespesaAgendamentoHeader despesaAgh, Sort sort) throws Exception
    {
       return getRepository().findAll(Specification.where(DespesaAgendamentoHeaderSpecifications.fgAtivoIgual(despesaAgh.getFgAtivo()))
-    		  										.and(DespesaAgendamentoHeaderSpecifications.tpDespesaIgual(despesaAgh.getTpDespesaAgh()))
     		  									    .and(DespesaAgendamentoHeaderSpecifications.fetchCategoria())
     		  									    .and(DespesaAgendamentoHeaderSpecifications.fetchSubcategoria())    		  									    
                                                     .and(DespesaAgendamentoHeaderSpecifications.idUsuarioIgual(despesaAgh.getIdUsuario())), sort);

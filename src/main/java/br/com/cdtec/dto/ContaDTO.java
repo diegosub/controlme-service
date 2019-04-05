@@ -28,8 +28,6 @@ public class ContaDTO implements Serializable
    
    private Boolean fgPrincipal;
    
-   private String strVlSaldo;
-
 
    public BigInteger getIdConta()
    {
@@ -129,15 +127,5 @@ public class ContaDTO implements Serializable
    public void setFgPrincipal(Boolean fgPrincipal)
    {
       this.fgPrincipal = fgPrincipal;
-   }
-
-   public String getStrVlSaldo()
-   {
-      return strVlSaldo;
-   }
-
-   public void setStrVlSaldo(String strVlSaldo)
-   {
-      this.strVlSaldo = strVlSaldo;
    }
 }

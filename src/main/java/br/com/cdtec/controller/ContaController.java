@@ -1,7 +1,6 @@
 package br.com.cdtec.controller;
 
 import java.math.BigInteger;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,11 +45,6 @@ public class ContaController extends CrudController<Conta, BigInteger, ContaServ
            List<Conta> lista = getService().pesquisar(conta, this.sortField());
            lista = (List<Conta>) new RetirarLazy<List<Conta>>(lista).execute();           
            List<ContaDTO> listaRetorno = lista.stream().map(objeto -> convertToDto(objeto)).collect(Collectors.toList());
-           
-           for (ContaDTO contaDTO : listaRetorno)
-		   {
-        	  contaDTO.setStrVlSaldo(new DecimalFormat("#,##0.00").format(contaDTO.getVlSaldo()));
-		   }
            
            response.setData(listaRetorno);
            return ResponseEntity.ok(response);
@@ -179,7 +173,7 @@ public class ContaController extends CrudController<Conta, BigInteger, ContaServ
             if (i < listaContaDTO.size() + 1)
             {
                listaContaDTO.get(i - 1).setFgControle("S");
-               listaContaDTO.get(i - 1).setStrVlSaldo(new DecimalFormat("#,##0.00").format(listaContaDTO.get(i - 1).getVlSaldo()));
+               //listaContaDTO.get(i - 1).setStrVlSaldo(new DecimalFormat("#,##0.00").format(listaContaDTO.get(i - 1).getVlSaldo()));
                subListaContaDTO.add(listaContaDTO.get(i - 1));
             }
             else

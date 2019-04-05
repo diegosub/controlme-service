@@ -3,6 +3,7 @@ package br.com.cdtec.entity;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -29,233 +31,219 @@ import br.com.cdtec.entity.filter.FiltroDespesaCartao;
 public class DespesaAgendamentoHeader implements Serializable
 {
 
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_DESPESA_AGH")
-	@Column(name = "id_despesa_agh")
-	private BigInteger idDespesaAgh;
+   @Id
+   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_DESPESA_AGH")
+   @Column(name = "id_despesa_agh")
+   private BigInteger idDespesaAgh;
 
-	@Column(name = "id_categoria")
-	private BigInteger idCategoria;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_categoria", insertable = false, updatable = false)
-	private Categoria categoria;
+   @Column(name = "id_categoria")
+   private BigInteger idCategoria;
 
-	@Column(name = "id_subcategoria")
-	private BigInteger idSubcategoria;
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
+   private Categoria categoria;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_subcategoria", insertable = false, updatable = false)
-	private Subcategoria subcategoria;
-	
-	@Column(name = "dt_inicio")
-	private Date dtInicio;
+   @Column(name = "id_subcategoria")
+   private BigInteger idSubcategoria;
 
-	@Column(name = "vl_despesa_agh")
-	private Double vlDespesaAgh;
-	
-	@Column(name = "tp_despesa_agh")
-	private String tpDespesaAgh;
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "id_subcategoria", insertable = false, updatable = false)
+   private Subcategoria subcategoria;
 
-	@Column(name = "nr_parcelas")
-	private Integer nrParcelas;
+   @Column(name = "dt_inicio")
+   private Date dtInicio;
 
-	@Column(name = "id_usuario")
-	private BigInteger idUsuario;
+   @Column(name = "vl_despesa_agh")
+   private Double vlDespesaAgh;
 
-	@Column(name = "fg_ativo")
-	private Boolean fgAtivo;
+   @Column(name = "nr_parcelas")
+   private Integer nrParcelas;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "dt_cadastro")
-	private Date dtCadastro;
+   @Column(name = "id_usuario")
+   private BigInteger idUsuario;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "dt_alteracao")
-	private Date dtAlteracao;
+   @Column(name = "fg_ativo")
+   private Boolean fgAtivo;
 
-	@Column(name = "ds_observacao")
-	private String dsObservacao;
-	
-	@Column(name = "id_periodo")
-	private Integer idPeriodo;
-	
-	@Column(name = "nr_periodo")
-	private Integer nrPeriodo;
-	
-	@Transient
-	private FiltroDespesaCartao filtro;
-	
+   @Temporal(TemporalType.TIMESTAMP)
+   @Column(name = "dt_cadastro")
+   private Date dtCadastro;
 
-	public BigInteger getIdDespesaAgh()
-	{
-		return idDespesaAgh;
-	}
+   @Temporal(TemporalType.TIMESTAMP)
+   @Column(name = "dt_alteracao")
+   private Date dtAlteracao;
 
-	public void setIdDespesaAgh(BigInteger idDespesaAgh)
-	{
-		this.idDespesaAgh = idDespesaAgh;
-	}
+   @Column(name = "ds_observacao")
+   private String dsObservacao;
 
-	public BigInteger getIdCategoria()
-	{
-		return idCategoria;
-	}
+   @Column(name = "id_periodo_agh")
+   private Integer idPeriodoAgh;
 
-	public void setIdCategoria(BigInteger idCategoria)
-	{
-		this.idCategoria = idCategoria;
-	}
+   @OneToMany(mappedBy = "despesaAgendamentoHeader", fetch = FetchType.LAZY)
+   private List<DespesaAgendamentoDetalhe> listaDespesaAgendamentoDetalhe;
 
-	public Categoria getCategoria()
-	{
-		return categoria;
-	}
+   @Transient
+   private FiltroDespesaCartao filtro;
 
-	public void setCategoria(Categoria categoria)
-	{
-		this.categoria = categoria;
-	}
+   public BigInteger getIdDespesaAgh()
+   {
+      return idDespesaAgh;
+   }
 
-	public BigInteger getIdSubcategoria()
-	{
-		return idSubcategoria;
-	}
+   public void setIdDespesaAgh(BigInteger idDespesaAgh)
+   {
+      this.idDespesaAgh = idDespesaAgh;
+   }
 
-	public void setIdSubcategoria(BigInteger idSubcategoria)
-	{
-		this.idSubcategoria = idSubcategoria;
-	}
+   public BigInteger getIdCategoria()
+   {
+      return idCategoria;
+   }
 
-	public Subcategoria getSubcategoria()
-	{
-		return subcategoria;
-	}
+   public void setIdCategoria(BigInteger idCategoria)
+   {
+      this.idCategoria = idCategoria;
+   }
 
-	public void setSubcategoria(Subcategoria subcategoria)
-	{
-		this.subcategoria = subcategoria;
-	}
+   public Categoria getCategoria()
+   {
+      return categoria;
+   }
 
-	public Date getDtInicio()
-	{
-		return dtInicio;
-	}
+   public void setCategoria(Categoria categoria)
+   {
+      this.categoria = categoria;
+   }
 
-	public void setDtInicio(Date dtInicio)
-	{
-		this.dtInicio = dtInicio;
-	}
+   public BigInteger getIdSubcategoria()
+   {
+      return idSubcategoria;
+   }
 
-	public Double getVlDespesaAgh()
-	{
-		return vlDespesaAgh;
-	}
+   public void setIdSubcategoria(BigInteger idSubcategoria)
+   {
+      this.idSubcategoria = idSubcategoria;
+   }
 
-	public void setVlDespesaAgh(Double vlDespesaAgh)
-	{
-		this.vlDespesaAgh = vlDespesaAgh;
-	}
+   public Subcategoria getSubcategoria()
+   {
+      return subcategoria;
+   }
 
-	public String getTpDespesaAgh()
-	{
-		return tpDespesaAgh;
-	}
+   public void setSubcategoria(Subcategoria subcategoria)
+   {
+      this.subcategoria = subcategoria;
+   }
 
-	public void setTpDespesaAgh(String tpDespesaAgh)
-	{
-		this.tpDespesaAgh = tpDespesaAgh;
-	}
+   public Date getDtInicio()
+   {
+      return dtInicio;
+   }
 
-	public Integer getNrParcelas()
-	{
-		return nrParcelas;
-	}
+   public void setDtInicio(Date dtInicio)
+   {
+      this.dtInicio = dtInicio;
+   }
 
-	public void setNrParcelas(Integer nrParcelas)
-	{
-		this.nrParcelas = nrParcelas;
-	}
+   public Double getVlDespesaAgh()
+   {
+      return vlDespesaAgh;
+   }
 
-	public BigInteger getIdUsuario()
-	{
-		return idUsuario;
-	}
+   public void setVlDespesaAgh(Double vlDespesaAgh)
+   {
+      this.vlDespesaAgh = vlDespesaAgh;
+   }
 
-	public void setIdUsuario(BigInteger idUsuario)
-	{
-		this.idUsuario = idUsuario;
-	}
+   public Integer getNrParcelas()
+   {
+      return nrParcelas;
+   }
 
-	public Boolean getFgAtivo()
-	{
-		return fgAtivo;
-	}
+   public void setNrParcelas(Integer nrParcelas)
+   {
+      this.nrParcelas = nrParcelas;
+   }
 
-	public void setFgAtivo(Boolean fgAtivo)
-	{
-		this.fgAtivo = fgAtivo;
-	}
+   public BigInteger getIdUsuario()
+   {
+      return idUsuario;
+   }
 
-	public Date getDtCadastro()
-	{
-		return dtCadastro;
-	}
+   public void setIdUsuario(BigInteger idUsuario)
+   {
+      this.idUsuario = idUsuario;
+   }
 
-	public void setDtCadastro(Date dtCadastro)
-	{
-		this.dtCadastro = dtCadastro;
-	}
+   public Boolean getFgAtivo()
+   {
+      return fgAtivo;
+   }
 
-	public Date getDtAlteracao()
-	{
-		return dtAlteracao;
-	}
+   public void setFgAtivo(Boolean fgAtivo)
+   {
+      this.fgAtivo = fgAtivo;
+   }
 
-	public void setDtAlteracao(Date dtAlteracao)
-	{
-		this.dtAlteracao = dtAlteracao;
-	}
+   public Date getDtCadastro()
+   {
+      return dtCadastro;
+   }
 
-	public FiltroDespesaCartao getFiltro()
-	{
-		return filtro;
-	}
+   public void setDtCadastro(Date dtCadastro)
+   {
+      this.dtCadastro = dtCadastro;
+   }
 
-	public void setFiltro(FiltroDespesaCartao filtro)
-	{
-		this.filtro = filtro;
-	}
+   public Date getDtAlteracao()
+   {
+      return dtAlteracao;
+   }
 
-	public String getDsObservacao()
-	{
-		return dsObservacao;
-	}
+   public void setDtAlteracao(Date dtAlteracao)
+   {
+      this.dtAlteracao = dtAlteracao;
+   }
 
-	public void setDsObservacao(String dsObservacao)
-	{
-		this.dsObservacao = dsObservacao;
-	}
+   public String getDsObservacao()
+   {
+      return dsObservacao;
+   }
 
-	public Integer getIdPeriodo()
-	{
-		return idPeriodo;
-	}
+   public void setDsObservacao(String dsObservacao)
+   {
+      this.dsObservacao = dsObservacao;
+   }
 
-	public void setIdPeriodo(Integer idPeriodo)
-	{
-		this.idPeriodo = idPeriodo;
-	}
+   public Integer getIdPeriodoAgh()
+   {
+      return idPeriodoAgh;
+   }
 
-	public Integer getNrPeriodo()
-	{
-		return nrPeriodo;
-	}
+   public void setIdPeriodoAgh(Integer idPeriodoAgh)
+   {
+      this.idPeriodoAgh = idPeriodoAgh;
+   }
 
-	public void setNrPeriodo(Integer nrPeriodo)
-	{
-		this.nrPeriodo = nrPeriodo;
-	}
+   public FiltroDespesaCartao getFiltro()
+   {
+      return filtro;
+   }
+
+   public void setFiltro(FiltroDespesaCartao filtro)
+   {
+      this.filtro = filtro;
+   }
+
+   public List<DespesaAgendamentoDetalhe> getListaDespesaAgendamentoDetalhe()
+   {
+      return listaDespesaAgendamentoDetalhe;
+   }
+
+   public void setListaDespesaAgendamentoDetalhe(List<DespesaAgendamentoDetalhe> listaDespesaAgendamentoDetalhe)
+   {
+      this.listaDespesaAgendamentoDetalhe = listaDespesaAgendamentoDetalhe;
+   }
 }

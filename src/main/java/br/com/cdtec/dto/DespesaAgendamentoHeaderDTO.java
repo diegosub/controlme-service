@@ -3,190 +3,189 @@ package br.com.cdtec.dto;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 public class DespesaAgendamentoHeaderDTO implements Serializable
 {
+   private static final long serialVersionUID = 1L;
 
-	private static final long serialVersionUID = 1L;
+   private BigInteger idDespesaAgh;
 
-	private BigInteger idDespesaAgh;
+   private BigInteger idCategoria;
+   
+   private CategoriaDTO categoria;
 
-	private BigInteger idCategoria;
-	
-	private CategoriaDTO categoria;
+   private BigInteger idSubcategoria;
 
-	private BigInteger idSubcategoria;
+   private SubcategoriaDTO subcategoria;
+   
+   private Date dtInicio;
 
-	private SubcategoriaDTO subcategoria;
+   private Double vlDespesaAgh;
+   
+   private Integer nrParcelas;
 
-	private Date dtInicio;
-	
-	private String tpDespesaAgh;
+   private BigInteger idUsuario;
 
-	private Double vlDespesaAgh;
-	
-	private String strVlDespesaAgh;
+   private Boolean fgAtivo;
 
-	private String dsObservacao;
+   private Date dtCadastro;
 
-	private BigInteger idUsuario;
+   private Date dtAlteracao;
 
-	private Boolean fgAtivo;
+   private String dsObservacao;
+   
+   private Integer idPeriodoAgh;
+   
+   private List<DespesaAgendamentoDetalheDTO> listaAgendamentoDetalheDTO;
 
-	private Date dtCadastro;
-	
-	private Integer idPeriodo;
-	
-	private Integer nrPeriodo;
-	
+   public BigInteger getIdDespesaAgh()
+   {
+      return idDespesaAgh;
+   }
 
-	public BigInteger getIdDespesaAgh()
-	{
-		return idDespesaAgh;
-	}
+   public void setIdDespesaAgh(BigInteger idDespesaAgh)
+   {
+      this.idDespesaAgh = idDespesaAgh;
+   }
 
-	public void setIdDespesaAgh(BigInteger idDespesaAgh)
-	{
-		this.idDespesaAgh = idDespesaAgh;
-	}
+   public BigInteger getIdCategoria()
+   {
+      return idCategoria;
+   }
 
-	public BigInteger getIdCategoria()
-	{
-		return idCategoria;
-	}
+   public void setIdCategoria(BigInteger idCategoria)
+   {
+      this.idCategoria = idCategoria;
+   }
 
-	public void setIdCategoria(BigInteger idCategoria)
-	{
-		this.idCategoria = idCategoria;
-	}
+   public CategoriaDTO getCategoria()
+   {
+      return categoria;
+   }
 
-	public CategoriaDTO getCategoria()
-	{
-		return categoria;
-	}
+   public void setCategoria(CategoriaDTO categoria)
+   {
+      this.categoria = categoria;
+   }
 
-	public void setCategoria(CategoriaDTO categoria)
-	{
-		this.categoria = categoria;
-	}
+   public BigInteger getIdSubcategoria()
+   {
+      return idSubcategoria;
+   }
 
-	public BigInteger getIdSubcategoria()
-	{
-		return idSubcategoria;
-	}
+   public void setIdSubcategoria(BigInteger idSubcategoria)
+   {
+      this.idSubcategoria = idSubcategoria;
+   }
 
-	public void setIdSubcategoria(BigInteger idSubcategoria)
-	{
-		this.idSubcategoria = idSubcategoria;
-	}
+   public SubcategoriaDTO getSubcategoria()
+   {
+      return subcategoria;
+   }
 
-	public SubcategoriaDTO getSubcategoria()
-	{
-		return subcategoria;
-	}
+   public void setSubcategoria(SubcategoriaDTO subcategoria)
+   {
+      this.subcategoria = subcategoria;
+   }
 
-	public void setSubcategoria(SubcategoriaDTO subcategoria)
-	{
-		this.subcategoria = subcategoria;
-	}
+   public Date getDtInicio()
+   {
+      return dtInicio;
+   }
 
-	public Date getDtInicio()
-	{
-		return dtInicio;
-	}
+   public void setDtInicio(Date dtInicio)
+   {
+      this.dtInicio = dtInicio;
+   }
 
-	public void setDtInicio(Date dtInicio)
-	{
-		this.dtInicio = dtInicio;
-	}
+   public Double getVlDespesaAgh()
+   {
+      return vlDespesaAgh;
+   }
 
-	public Double getVlDespesaAgh()
-	{
-		return vlDespesaAgh;
-	}
+   public void setVlDespesaAgh(Double vlDespesaAgh)
+   {
+      this.vlDespesaAgh = vlDespesaAgh;
+   }
 
-	public void setVlDespesaAgh(Double vlDespesaAgh)
-	{
-		this.vlDespesaAgh = vlDespesaAgh;
-	}
+   public Integer getNrParcelas()
+   {
+      return nrParcelas;
+   }
 
-	public String getStrVlDespesaAgh()
-	{
-		return strVlDespesaAgh;
-	}
+   public void setNrParcelas(Integer nrParcelas)
+   {
+      this.nrParcelas = nrParcelas;
+   }
 
-	public void setStrVlDespesaAgh(String strVlDespesaAgh)
-	{
-		this.strVlDespesaAgh = strVlDespesaAgh;
-	}
+   public BigInteger getIdUsuario()
+   {
+      return idUsuario;
+   }
 
-	public String getDsObservacao()
-	{
-		return dsObservacao;
-	}
+   public void setIdUsuario(BigInteger idUsuario)
+   {
+      this.idUsuario = idUsuario;
+   }
 
-	public void setDsObservacao(String dsObservacao)
-	{
-		this.dsObservacao = dsObservacao;
-	}
+   public Boolean getFgAtivo()
+   {
+      return fgAtivo;
+   }
 
-	public BigInteger getIdUsuario()
-	{
-		return idUsuario;
-	}
+   public void setFgAtivo(Boolean fgAtivo)
+   {
+      this.fgAtivo = fgAtivo;
+   }
 
-	public void setIdUsuario(BigInteger idUsuario)
-	{
-		this.idUsuario = idUsuario;
-	}
+   public Date getDtCadastro()
+   {
+      return dtCadastro;
+   }
 
-	public Boolean getFgAtivo()
-	{
-		return fgAtivo;
-	}
+   public void setDtCadastro(Date dtCadastro)
+   {
+      this.dtCadastro = dtCadastro;
+   }
 
-	public void setFgAtivo(Boolean fgAtivo)
-	{
-		this.fgAtivo = fgAtivo;
-	}
+   public Date getDtAlteracao()
+   {
+      return dtAlteracao;
+   }
 
-	public Date getDtCadastro()
-	{
-		return dtCadastro;
-	}
+   public void setDtAlteracao(Date dtAlteracao)
+   {
+      this.dtAlteracao = dtAlteracao;
+   }
 
-	public void setDtCadastro(Date dtCadastro)
-	{
-		this.dtCadastro = dtCadastro;
-	}
+   public String getDsObservacao()
+   {
+      return dsObservacao;
+   }
 
-	public Integer getIdPeriodo()
-	{
-		return idPeriodo;
-	}
+   public void setDsObservacao(String dsObservacao)
+   {
+      this.dsObservacao = dsObservacao;
+   }
 
-	public void setIdPeriodo(Integer idPeriodo)
-	{
-		this.idPeriodo = idPeriodo;
-	}
+   public Integer getIdPeriodoAgh()
+   {
+      return idPeriodoAgh;
+   }
 
-	public Integer getNrPeriodo()
-	{
-		return nrPeriodo;
-	}
+   public void setIdPeriodoAgh(Integer idPeriodoAgh)
+   {
+      this.idPeriodoAgh = idPeriodoAgh;
+   }
 
-	public void setNrPeriodo(Integer nrPeriodo)
-	{
-		this.nrPeriodo = nrPeriodo;
-	}
+   public List<DespesaAgendamentoDetalheDTO> getListaAgendamentoDetalheDTO()
+   {
+      return listaAgendamentoDetalheDTO;
+   }
 
-	public String getTpDespesaAgh()
-	{
-		return tpDespesaAgh;
-	}
-
-	public void setTpDespesaAgh(String tpDespesaAgh)
-	{
-		this.tpDespesaAgh = tpDespesaAgh;
-	}
+   public void setListaAgendamentoDetalheDTO(List<DespesaAgendamentoDetalheDTO> listaAgendamentoDetalheDTO)
+   {
+      this.listaAgendamentoDetalheDTO = listaAgendamentoDetalheDTO;
+   }
 }

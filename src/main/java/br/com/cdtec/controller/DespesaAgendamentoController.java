@@ -1,7 +1,6 @@
 package br.com.cdtec.controller;
 
 import java.math.BigInteger;
-import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -94,7 +93,6 @@ public class DespesaAgendamentoController extends CrudController<DespesaAgendame
 	{
 		DespesaAgendamentoHeaderDTO dto = new DespesaAgendamentoHeaderDTO();
 		modelMapper.map(despesa, dto);
-		dto.setStrVlDespesaAgh(new DecimalFormat("#,##0.00").format(dto.getVlDespesaAgh()));
 
 		return dto;
 	}
