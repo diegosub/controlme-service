@@ -14,7 +14,7 @@ public class DespesaAgendamentoDetalheDTO implements Serializable
 
    private Integer nrParcela;
 
-   private Integer vlParcela;
+   private Double vlParcela;
 
    private Date dtVencimento;
 
@@ -58,12 +58,12 @@ public class DespesaAgendamentoDetalheDTO implements Serializable
       this.nrParcela = nrParcela;
    }
 
-   public Integer getVlParcela()
+   public Double getVlParcela()
    {
       return vlParcela;
    }
 
-   public void setVlParcela(Integer vlParcela)
+   public void setVlParcela(Double vlParcela)
    {
       this.vlParcela = vlParcela;
    }

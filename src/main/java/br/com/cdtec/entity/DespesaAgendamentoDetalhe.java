@@ -44,7 +44,7 @@ public class DespesaAgendamentoDetalhe implements Serializable
    private Integer nrParcela;
 
    @Column(name = "vl_parcela")
-   private Integer vlParcela;
+   private Double vlParcela;
 
    @Column(name = "dt_vencimento")
    private Date dtVencimento;
@@ -96,12 +96,12 @@ public class DespesaAgendamentoDetalhe implements Serializable
       this.nrParcela = nrParcela;
    }
 
-   public Integer getVlParcela()
+   public Double getVlParcela()
    {
       return vlParcela;
    }
 
-   public void setVlParcela(Integer vlParcela)
+   public void setVlParcela(Double vlParcela)
    {
       this.vlParcela = vlParcela;
    }

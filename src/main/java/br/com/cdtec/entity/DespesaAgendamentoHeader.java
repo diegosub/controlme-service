@@ -22,7 +22,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Proxy;
 
-import br.com.cdtec.entity.filter.FiltroDespesaCartao;
+import br.com.cdtec.entity.filter.FiltroDespesaAgendamentoHeader;
 
 @Entity
 @Table(name = "tb_despesa_agh", schema = "ngc")
@@ -51,6 +51,13 @@ public class DespesaAgendamentoHeader implements Serializable
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "id_subcategoria", insertable = false, updatable = false)
    private Subcategoria subcategoria;
+   
+   @Column(name = "id_conta")
+   private BigInteger idConta;
+
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "id_conta", insertable = false, updatable = false)
+   private Conta conta;   
 
    @Column(name = "dt_inicio")
    private Date dtInicio;
@@ -85,7 +92,7 @@ public class DespesaAgendamentoHeader implements Serializable
    private List<DespesaAgendamentoDetalhe> listaDespesaAgendamentoDetalhe;
 
    @Transient
-   private FiltroDespesaCartao filtro;
+   private FiltroDespesaAgendamentoHeader filtro;
 
    public BigInteger getIdDespesaAgh()
    {
@@ -227,12 +234,12 @@ public class DespesaAgendamentoHeader implements Serializable
       this.idPeriodoAgh = idPeriodoAgh;
    }
 
-   public FiltroDespesaCartao getFiltro()
+   public FiltroDespesaAgendamentoHeader getFiltro()
    {
       return filtro;
    }
 
-   public void setFiltro(FiltroDespesaCartao filtro)
+   public void setFiltro(FiltroDespesaAgendamentoHeader filtro)
    {
       this.filtro = filtro;
    }
@@ -245,5 +252,25 @@ public class DespesaAgendamentoHeader implements Serializable
    public void setListaDespesaAgendamentoDetalhe(List<DespesaAgendamentoDetalhe> listaDespesaAgendamentoDetalhe)
    {
       this.listaDespesaAgendamentoDetalhe = listaDespesaAgendamentoDetalhe;
+   }
+
+   public BigInteger getIdConta()
+   {
+      return idConta;
+   }
+
+   public void setIdConta(BigInteger idConta)
+   {
+      this.idConta = idConta;
+   }
+
+   public Conta getConta()
+   {
+      return conta;
+   }
+
+   public void setConta(Conta conta)
+   {
+      this.conta = conta;
    }
 }

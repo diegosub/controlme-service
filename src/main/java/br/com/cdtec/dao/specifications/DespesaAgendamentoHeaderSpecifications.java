@@ -19,6 +19,23 @@ public class DespesaAgendamentoHeaderSpecifications
    private DespesaAgendamentoHeaderSpecifications()
    {
    }
+   
+   @SuppressWarnings("serial")
+   public static Specification<DespesaAgendamentoHeader> idDespesaAghIgual(final BigInteger idDespesaAgh)
+   {
+      return new Specification<DespesaAgendamentoHeader>()
+      {
+         public Predicate toPredicate(Root<DespesaAgendamentoHeader> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         {
+            if (idDespesaAgh != null && !idDespesaAgh.toString().equals(""))
+            {
+               return cb.equal(root.get("idDespesaAgh"), idDespesaAgh);
+            }
+
+            return null;
+         }
+      };
+   }
 
    @SuppressWarnings("serial")
    public static Specification<DespesaAgendamentoHeader> fgAtivoIgual(final Boolean fgAtivo)

@@ -4,28 +4,28 @@ import java.util.Date;
 
 public class FiltroDespesaAgendamentoHeader
 {
-	private Date dtDespesaInicio;
+   private Date dtInicioInicio;
 
-	private Date dtDespesaFim;
+   private Date dtInicioFim;
 
-	public Date getDtDespesaInicio()
-	{
-		return dtDespesaInicio;
-	}
+   public Date getDtInicioInicio()
+   {
+      return dtInicioInicio;
+   }
 
-	public void setDtDespesaInicio(Date dtDespesaInicio)
-	{
-		this.dtDespesaInicio = dtDespesaInicio;
-	}
+   public void setDtInicioInicio(Date dtInicioInicio)
+   {
+      this.dtInicioInicio = dtInicioInicio;
+   }
 
-	public Date getDtDespesaFim()
-	{
-		return dtDespesaFim;
-	}
+   public Date getDtInicioFim()
+   {
+      return dtInicioFim;
+   }
 
-	public void setDtDespesaFim(Date dtDespesaFim)
-	{
-		this.dtDespesaFim = dtDespesaFim;
-	}
+   public void setDtInicioFim(Date dtInicioFim)
+   {
+      this.dtInicioFim = dtInicioFim;
+   }
 
 }

@@ -19,6 +19,10 @@ public class DespesaAgendamentoHeaderDTO implements Serializable
 
    private SubcategoriaDTO subcategoria;
    
+   private BigInteger idConta;
+
+   private ContaDTO conta;
+   
    private Date dtInicio;
 
    private Double vlDespesaAgh;
@@ -38,6 +42,8 @@ public class DespesaAgendamentoHeaderDTO implements Serializable
    private Integer idPeriodoAgh;
    
    private List<DespesaAgendamentoDetalheDTO> listaAgendamentoDetalheDTO;
+   
+   
 
    public BigInteger getIdDespesaAgh()
    {
@@ -187,5 +193,30 @@ public class DespesaAgendamentoHeaderDTO implements Serializable
    public void setListaAgendamentoDetalheDTO(List<DespesaAgendamentoDetalheDTO> listaAgendamentoDetalheDTO)
    {
       this.listaAgendamentoDetalheDTO = listaAgendamentoDetalheDTO;
+   }
+
+   public BigInteger getIdConta()
+   {
+      return idConta;
+   }
+
+   public void setIdConta(BigInteger idConta)
+   {
+      this.idConta = idConta;
+   }
+
+   public ContaDTO getConta()
+   {
+      return conta;
+   }
+
+   public void setConta(ContaDTO conta)
+   {
+      this.conta = conta;
+   }
+
+   public static long getSerialversionuid()
+   {
+      return serialVersionUID;
    }
 }
