@@ -11,21 +11,21 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import br.com.cdtec.entity.DespesaCartao;
+import br.com.cdtec.entity.DespesaCartaoHeader;
 
-public class DespesaCartaoSpecifications
+public class DespesaCartaoHeaderSpecifications
 {
 
-   private DespesaCartaoSpecifications()
+   private DespesaCartaoHeaderSpecifications()
    {
    }
 
    @SuppressWarnings("serial")
-   public static Specification<DespesaCartao> fgAtivoIgual(final Boolean fgAtivo)
+   public static Specification<DespesaCartaoHeader> fgAtivoIgual(final Boolean fgAtivo)
    {
-      return new Specification<DespesaCartao>()
+      return new Specification<DespesaCartaoHeader>()
       {
-         public Predicate toPredicate(Root<DespesaCartao> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         public Predicate toPredicate(Root<DespesaCartaoHeader> root, CriteriaQuery<?> query, CriteriaBuilder cb)
          {
             if (fgAtivo != null && !fgAtivo.toString().equals("") && !fgAtivo.toString().equals("T"))
             {
@@ -38,11 +38,11 @@ public class DespesaCartaoSpecifications
    }
    
    @SuppressWarnings("serial")
-   public static Specification<DespesaCartao> idUsuarioIgual(final BigInteger idUsuario)
+   public static Specification<DespesaCartaoHeader> idUsuarioIgual(final BigInteger idUsuario)
    {
-      return new Specification<DespesaCartao>()
+      return new Specification<DespesaCartaoHeader>()
       {
-         public Predicate toPredicate(Root<DespesaCartao> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         public Predicate toPredicate(Root<DespesaCartaoHeader> root, CriteriaQuery<?> query, CriteriaBuilder cb)
          {
             if (idUsuario != null && !idUsuario.toString().equals(""))
             {
@@ -55,11 +55,11 @@ public class DespesaCartaoSpecifications
    }
    
    @SuppressWarnings("serial")
-   public static Specification<DespesaCartao> fetchCategoria()
+   public static Specification<DespesaCartaoHeader> fetchCategoria()
    {
-      return new Specification<DespesaCartao>()
+      return new Specification<DespesaCartaoHeader>()
       {
-         public Predicate toPredicate(Root<DespesaCartao> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         public Predicate toPredicate(Root<DespesaCartaoHeader> root, CriteriaQuery<?> query, CriteriaBuilder cb)
          {
             if (query.getResultType() != Long.class)
             {
@@ -75,11 +75,11 @@ public class DespesaCartaoSpecifications
    }
    
    @SuppressWarnings("serial")
-   public static Specification<DespesaCartao> fetchSubcategoria()
+   public static Specification<DespesaCartaoHeader> fetchSubcategoria()
    {
-      return new Specification<DespesaCartao>()
+      return new Specification<DespesaCartaoHeader>()
       {
-         public Predicate toPredicate(Root<DespesaCartao> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         public Predicate toPredicate(Root<DespesaCartaoHeader> root, CriteriaQuery<?> query, CriteriaBuilder cb)
          {
             root.fetch("subcategoria", JoinType.LEFT);
             query.distinct(true);
@@ -90,11 +90,11 @@ public class DespesaCartaoSpecifications
    }
    
    @SuppressWarnings("serial")
-   public static Specification<DespesaCartao> fetchCartao()
+   public static Specification<DespesaCartaoHeader> fetchCartao()
    {
-      return new Specification<DespesaCartao>()
+      return new Specification<DespesaCartaoHeader>()
       {
-         public Predicate toPredicate(Root<DespesaCartao> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         public Predicate toPredicate(Root<DespesaCartaoHeader> root, CriteriaQuery<?> query, CriteriaBuilder cb)
          {
             if (query.getResultType() != Long.class)
             {
@@ -110,11 +110,11 @@ public class DespesaCartaoSpecifications
    }
    
    @SuppressWarnings("serial")
-   public static Specification<DespesaCartao> dtDespesaBetween(final Date dtDespesaInicio, final Date dtDespesaFim)
+   public static Specification<DespesaCartaoHeader> dtDespesaBetween(final Date dtDespesaInicio, final Date dtDespesaFim)
    {
-      return new Specification<DespesaCartao>()
+      return new Specification<DespesaCartaoHeader>()
       {
-         public Predicate toPredicate(Root<DespesaCartao> root, CriteriaQuery<?> query, CriteriaBuilder cb)
+         public Predicate toPredicate(Root<DespesaCartaoHeader> root, CriteriaQuery<?> query, CriteriaBuilder cb)
          {
             if (dtDespesaInicio != null && !dtDespesaInicio.toString().equals("")
                   && dtDespesaFim != null && !dtDespesaFim.toString().equals(""))

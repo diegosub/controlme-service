@@ -5,10 +5,10 @@ import java.math.BigInteger;
 import org.springframework.context.annotation.Lazy;
 
 import br.com.cdtec.crud.repository.GenericRepository;
-import br.com.cdtec.entity.DespesaCartao;
+import br.com.cdtec.entity.DespesaCartaoHeader;
 
 @Lazy(true)
-public interface DespesaCartaoRepository extends GenericRepository<DespesaCartao, BigInteger>
+public interface DespesaCartaoHeaderRepository extends GenericRepository<DespesaCartaoHeader, BigInteger>
 {
 
 }
