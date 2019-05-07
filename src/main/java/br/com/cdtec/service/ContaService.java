@@ -90,7 +90,7 @@ public class ContaService extends CrudService<Conta, BigInteger, ContaRepository
          String dtMovimentacao = DataCustom.getDataSql(conta.getDtCadastro(), DataCustom.SQL_DATE);
 
          movimentacaoService.gerarMovimentacaoEntrada(conta.getIdUsuario(), MovimentacaoService.TIPO_MOVIMENTACAO_CREDITO_CRIACAO_CONTA,
-               conta.getVlSaldo(), conta.getIdConta(), conta.getIdConta(), new BigInteger(String.valueOf(1)), dtMovimentacao, "I");
+               conta.getVlSaldo(), conta.getIdConta(), conta.getIdConta(), new BigInteger(String.valueOf(1)), dtMovimentacao);
 
       }
 
@@ -108,11 +108,10 @@ public class ContaService extends CrudService<Conta, BigInteger, ContaRepository
       getRepository().save(conta);
 
       // ALTERANDO MOVIMENTACAO
-      String dtMovimentacao = DataCustom.getDataSql(conta.getDtCadastro(),
-      DataCustom.SQL_DATE);
-      
-      movimentacaoService.gerarMovimentacaoEntrada(conta.getIdUsuario(), MovimentacaoService.TIPO_MOVIMENTACAO_CREDITO_CRIACAO_CONTA,
-            conta.getVlSaldo(), conta.getIdConta(), conta.getIdConta(), new BigInteger(String.valueOf(1)), dtMovimentacao, "A");
+      String dtMovimentacao = DataCustom.getDataSql(conta.getDtCadastro(), DataCustom.SQL_DATE);
+
+      movimentacaoService.alterarMovimentacaoEntrada(conta.getIdUsuario(), MovimentacaoService.TIPO_MOVIMENTACAO_CREDITO_CRIACAO_CONTA,
+            conta.getVlSaldo(), conta.getIdConta(), conta.getIdConta(), new BigInteger(String.valueOf(1)), dtMovimentacao);
 
       return conta;
    }

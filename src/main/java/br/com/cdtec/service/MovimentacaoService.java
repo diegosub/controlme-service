@@ -22,6 +22,7 @@ public class MovimentacaoService extends CrudService<Movimentacao, BigInteger, M
    private static final long serialVersionUID = 1L;
 
    public static final int TIPO_MOVIMENTACAO_CREDITO_CRIACAO_CONTA = 1;
+   public static final int TIPO_MOVIMENTACAO_RECEITA = 4;
    public static final int TIPO_MOVIMENTACAO_DESPESA = 5;
    
 
@@ -38,7 +39,7 @@ public class MovimentacaoService extends CrudService<Movimentacao, BigInteger, M
     */
    @Transactional
    public void gerarMovimentacaoEntrada(BigInteger idUsuario, Integer idTipoMovimentacao, Double qtEntrada, BigInteger idConta,
-                                        BigInteger idNsuOrigem, BigInteger idOrigem, String dtMovimentacao, String fgInserirAlterar) throws Exception
+                                        BigInteger idNsuOrigem, BigInteger idOrigem, String dtMovimentacao) throws Exception
    {
       Session sessao = this.em.unwrap(Session.class);
       sessao.flush();
@@ -50,9 +51,7 @@ public class MovimentacaoService extends CrudService<Movimentacao, BigInteger, M
                       + idConta+ ", "
                       + idNsuOrigem+ ", "
                       + idOrigem+ ", "
-                      + dtMovimentacao+ ",'"
-                      + fgInserirAlterar
-                      + "')";
+                      + dtMovimentacao+ ")";
 
       super.executeComando(sessao, cmdSql);
 
@@ -187,6 +186,38 @@ public class MovimentacaoService extends CrudService<Movimentacao, BigInteger, M
    }
    
    /**
+    * Metodo que chama a rotina para alterar uma movimentacao de entrada
+    * @param idUsuario
+    * @param idTipoMovimentacao
+    * @param vlReceita
+    * @param idConta
+    * @param idNsuOrigem
+    * @param idOrigem
+    * @param dtMovimentacao
+    * @throws Exception
+    */
+   @Transactional
+   public void alterarMovimentacaoEntrada(BigInteger idUsuario, Integer idTipoMovimentacao, Double vlReceita, BigInteger idConta,
+                                        BigInteger idNsuOrigem, BigInteger idOrigem, String dtMovimentacao) throws Exception
+   {
+      Session sessao = this.em.unwrap(Session.class);
+      sessao.flush();
+      
+      String cmdSql = "ngc.alterar_movimentacao_entrada("
+                      + idUsuario + ", "
+                      + idTipoMovimentacao + ", "
+                      + vlReceita + ", "
+                      + idConta + ", "
+                      + idNsuOrigem + ", "
+                      + idOrigem + ", "
+                      + dtMovimentacao
+                      + ")";
+
+      super.executeComando(sessao, cmdSql);
+
+   }
+   
+   /**
     * Metodo que chama a rotina para excluir definitivamente uma movimentacao de transferencia
     * @param idTransferencia
     * @throws Exception
@@ -218,5 +249,19 @@ public class MovimentacaoService extends CrudService<Movimentacao, BigInteger, M
 
    }
    
+   /**
+    * Metodo que chama a rotina para inativar uma receita (este metodo chama a rotina que deleta o registro da movimentacao e volta o saldo da conta)
+    * @param idReceita
+    * @throws Exception
+    */
+   @Transactional
+   public void excluirMovimentacaoEntrada(BigInteger idReceita) throws Exception
+   {
+      Session sessao = this.em.unwrap(Session.class);
+      sessao.flush();
+      
+      String cmdSql = "ngc.excluir_movimentacao_entrada(" + idReceita + ")";
+      super.executeComando(sessao, cmdSql);
+   }
    
 }
