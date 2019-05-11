@@ -46,8 +46,8 @@ public class DespesaCartaoDetalhe implements Serializable
    @Column(name = "vl_parcela")
    private Double vlParcela;
 
-   @Column(name = "dt_vencimento")
-   private Date dtVencimento;
+   @Column(name = "dt_referencia")
+   private Date dtReferencia;
 
    @Column(name = "fg_ativo")
    private Boolean fgAtivo;
@@ -110,14 +110,14 @@ public class DespesaCartaoDetalhe implements Serializable
       this.vlParcela = vlParcela;
    }
 
-   public Date getDtVencimento()
+   public Date getDtReferencia()
    {
-      return dtVencimento;
+      return dtReferencia;
    }
 
-   public void setDtVencimento(Date dtVencimento)
+   public void setDtReferencia(Date dtReferencia)
    {
-      this.dtVencimento = dtVencimento;
+      this.dtReferencia = dtReferencia;
    }
 
    public Boolean getFgAtivo()

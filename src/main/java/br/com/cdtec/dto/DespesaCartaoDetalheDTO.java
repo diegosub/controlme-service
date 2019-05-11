@@ -20,7 +20,7 @@ public class DespesaCartaoDetalheDTO implements Serializable
 
    private Double vlParcela;
 
-   private Date dtVencimento;
+   private Date dtReferencia;
 
    private Boolean fgAtivo;
 
@@ -78,14 +78,14 @@ public class DespesaCartaoDetalheDTO implements Serializable
       this.vlParcela = vlParcela;
    }
 
-   public Date getDtVencimento()
+   public Date getDtReferencia()
    {
-      return dtVencimento;
+      return dtReferencia;
    }
 
-   public void setDtVencimento(Date dtVencimento)
+   public void setDtReferencia(Date dtReferencia)
    {
-      this.dtVencimento = dtVencimento;
+      this.dtReferencia = dtReferencia;
    }
 
    public Boolean getFgAtivo()

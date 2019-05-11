@@ -17,7 +17,6 @@ import br.com.cdtec.crud.service.CrudService;
 import br.com.cdtec.dao.repository.DespesaCartaoDetalheRepository;
 import br.com.cdtec.dao.repository.DespesaCartaoHeaderRepository;
 import br.com.cdtec.dao.specifications.DespesaCartaoHeaderSpecifications;
-import br.com.cdtec.entity.Cartao;
 import br.com.cdtec.entity.DespesaCartaoDetalhe;
 import br.com.cdtec.entity.DespesaCartaoHeader;
 
@@ -34,9 +33,6 @@ public class DespesaCartaoHeaderService extends CrudService<DespesaCartaoHeader,
    
    @Autowired
    private DespesaCartaoDetalheService detalheService;
-   
-   @Autowired
-   private CartaoService cartaoService;
 
    public String getFieldSort()
    {
@@ -65,18 +61,18 @@ public class DespesaCartaoHeaderService extends CrudService<DespesaCartaoHeader,
       getRepository().save(despesaCch);
       
       // GET DADOS CARTAO
-      Cartao cartao = cartaoService.get(despesaCch.getIdCartao()).get();
+      //Cartao cartao = cartaoService.get(despesaCch.getIdCartao()).get();
 
       Date dataVencimento = despesaCch.getDtDespesa();
       GregorianCalendar gc = new GregorianCalendar();
       gc.setTime(dataVencimento);
       
-      if(gc.get(Calendar.DAY_OF_MONTH) >= cartao.getNrDiaCorte())
-      {
-         gc.add(Calendar.MONTH, 1);
-      }
-      
-      gc.set(Calendar.DAY_OF_MONTH, cartao.getNrDiaVencimento());
+//      if(gc.get(Calendar.DAY_OF_MONTH) >= cartao.getNrDiaCorte())
+//      {
+//         gc.add(Calendar.MONTH, 1);
+//      }
+//      
+//      gc.set(Calendar.DAY_OF_MONTH, cartao.getNrDiaVencimento());
 
       
       // INSERINDO DESPESA AGENDAMENTO DETALHE
@@ -93,7 +89,7 @@ public class DespesaCartaoHeaderService extends CrudService<DespesaCartaoHeader,
          detalhe.setVlParcela(despesaCch.getVlDespesa().doubleValue() / despesaCch.getNrParcelas().doubleValue());
          detalhe.setFgAtivo(true);
          detalhe.setDtCadastro(despesaCch.getDtCadastro());
-         detalhe.setDtVencimento(gc.getTime());
+         detalhe.setDtReferencia(gc.getTime());
          
          detalheRepository.save(detalhe);
       }
@@ -124,18 +120,18 @@ public class DespesaCartaoHeaderService extends CrudService<DespesaCartaoHeader,
       }
       
       // GET DADOS CARTAO
-      Cartao cartao = cartaoService.get(despesaCch.getIdCartao()).get();
+      //Cartao cartao = cartaoService.get(despesaCch.getIdCartao()).get();
 
       Date dataVencimento = despesaCch.getDtDespesa();
       GregorianCalendar gc = new GregorianCalendar();
       gc.setTime(dataVencimento);
       
-      if(gc.get(Calendar.DAY_OF_MONTH) >= cartao.getNrDiaCorte())
-      {
-         gc.add(Calendar.MONTH, 1);
-      }
-      
-      gc.set(Calendar.DAY_OF_MONTH, cartao.getNrDiaVencimento());
+//      if(gc.get(Calendar.DAY_OF_MONTH) >= cartao.getNrDiaCorte())
+//      {
+//         gc.add(Calendar.MONTH, 1);
+//      }
+//      
+//      gc.set(Calendar.DAY_OF_MONTH, cartao.getNrDiaVencimento());
 
       
       // INSERINDO DESPESA AGENDAMENTO DETALHE
@@ -152,7 +148,7 @@ public class DespesaCartaoHeaderService extends CrudService<DespesaCartaoHeader,
          detalhe.setVlParcela(despesaCch.getVlDespesa().doubleValue() / despesaCch.getNrParcelas().doubleValue());
          detalhe.setFgAtivo(true);
          detalhe.setDtCadastro(despesaCch.getDtCadastro());
-         detalhe.setDtVencimento(gc.getTime());
+         detalhe.setDtReferencia(gc.getTime());
          
          detalheRepository.save(detalhe);
       }
