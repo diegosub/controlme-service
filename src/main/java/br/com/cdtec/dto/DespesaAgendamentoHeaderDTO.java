@@ -10,6 +10,8 @@ public class DespesaAgendamentoHeaderDTO implements Serializable
    private static final long serialVersionUID = 1L;
 
    private BigInteger idDespesaAgh;
+   
+   private String dsDespesaAgh;
 
    private BigInteger idCategoria;
    
@@ -43,7 +45,6 @@ public class DespesaAgendamentoHeaderDTO implements Serializable
    
    private List<DespesaAgendamentoDetalheDTO> listaAgendamentoDetalheDTO;
    
-   
 
    public BigInteger getIdDespesaAgh()
    {
@@ -53,6 +54,16 @@ public class DespesaAgendamentoHeaderDTO implements Serializable
    public void setIdDespesaAgh(BigInteger idDespesaAgh)
    {
       this.idDespesaAgh = idDespesaAgh;
+   }
+
+   public String getDsDespesaAgh()
+   {
+      return dsDespesaAgh;
+   }
+
+   public void setDsDespesaAgh(String dsDespesaAgh)
+   {
+      this.dsDespesaAgh = dsDespesaAgh;
    }
 
    public BigInteger getIdCategoria()

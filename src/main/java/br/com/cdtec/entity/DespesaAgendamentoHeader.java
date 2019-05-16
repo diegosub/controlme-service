@@ -38,9 +38,12 @@ public class DespesaAgendamentoHeader implements Serializable
    @Column(name = "id_despesa_agh")
    private BigInteger idDespesaAgh;
 
+   @Column(name = "ds_despesa_agh")
+   private String dsDespesaAgh;
+   
    @Column(name = "id_categoria")
    private BigInteger idCategoria;
-
+   
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
    private Categoria categoria;
@@ -102,6 +105,16 @@ public class DespesaAgendamentoHeader implements Serializable
    public void setIdDespesaAgh(BigInteger idDespesaAgh)
    {
       this.idDespesaAgh = idDespesaAgh;
+   }
+   
+   public String getDsDespesaAgh()
+   {
+      return dsDespesaAgh;
+   }
+
+   public void setDsDespesaAgh(String dsDespesaAgh)
+   {
+      this.dsDespesaAgh = dsDespesaAgh;
    }
 
    public BigInteger getIdCategoria()

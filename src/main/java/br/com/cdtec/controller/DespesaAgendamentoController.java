@@ -58,6 +58,12 @@ public class DespesaAgendamentoController extends CrudController<DespesaAgendame
    @Override
    protected void validarInserir(DespesaAgendamentoHeader entity, BindingResult result)
    {
+      if (entity.getDsDespesaAgh() == null || entity.getDsDespesaAgh().trim().equals(""))
+      {
+         result.addError(new ObjectError("Despesa", "O campo Descrição é obrigatório."));
+         return;
+      }
+      
       if (entity.getIdCategoria() == null || entity.getIdCategoria().intValue() == 0)
       {
          result.addError(new ObjectError("Despesa", "O campo Categoria é obrigatório."));
@@ -83,6 +89,12 @@ public class DespesaAgendamentoController extends CrudController<DespesaAgendame
       if (entity.getIdDespesaAgh() == null)
       {
          result.addError(new ObjectError("Cartao", "O campo Código é obrigatório"));
+         return;
+      }
+      
+      if (entity.getDsDespesaAgh() == null || entity.getDsDespesaAgh().trim().equals(""))
+      {
+         result.addError(new ObjectError("Despesa", "O campo Descrição é obrigatório."));
          return;
       }
 
